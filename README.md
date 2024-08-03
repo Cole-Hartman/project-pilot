@@ -1,9 +1,16 @@
-# Project Title
+# Project Pilot
 
-One Paragraph of project description goes here
+Your CS project starts here
+- Resume looking empty? Stuck in a project drought? Find your dream project here.  
+- Project Pilot will tailor it's recommendations against your current skill level, goals, and ambition. 
+- Students who build projects are **% more likely to get an internship.  
+
+Students often finding themselves stuck after biting off more then they could chew on their "dream project".   
+Project Pilot will find the perfect project for your interests and skill. If you want to pursue a new tech stack for this project, Project Pilot will take that into consideration.
 
 ## Getting Started
 
+Visit the deployed version here: 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
 ### Prerequisites
