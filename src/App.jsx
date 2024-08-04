@@ -1,6 +1,7 @@
 //import { useState } from "react";
 import { motion } from "framer-motion";
 import Paper from '@mui/material/Paper';
+import { Link } from "react-router-dom";
 
 function App() {
   return (
@@ -15,6 +16,9 @@ function App() {
           ease: [0, 0.71, 0.2, 1.01]
         }}>Project Pilot</motion.div>
       <Paper elevation={4}>TEST</Paper>
+      <button>
+        <Link to={"test"}>CLICK ME</Link>
+      </button>
     </>
   );
 }
