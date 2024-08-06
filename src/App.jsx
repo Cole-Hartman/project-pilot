@@ -1,15 +1,14 @@
 //import { useState } from "react";
 import { motion } from "framer-motion";
 import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
 import { Link } from "react-router-dom";
 import Navbar from "./components/navbar.jsx"
 import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
 import MobileTree from './assets/mobile-tree.png'
+import { useRef } from 'react';
 
 function App() {
+  const aboutRef = useRef(null);
 
   return (
     <>
@@ -50,8 +49,13 @@ function App() {
           </motion.div>
 
           <div className="mx-2 my-5 flex gap-5">
-            <Button variant="contained">Get Started</Button>
-            <Button variant="outlined">About</Button>
+            <Link to={'form'}><Button variant="contained">Get Started</Button></Link>
+            <Button variant="outlined" onClick={() => {
+              aboutRef.current?.scrollIntoView({ behavior: 'smooth' })
+            }}
+            >
+              About
+            </Button>
           </div>
 
           <div className="mx-5 mt-3">
@@ -66,7 +70,7 @@ function App() {
           </div>
 
           <div className="mx-3 text-5xl font-bold mt-20">
-            <div>WORKS AROUND YOU</div>
+            <div ref={aboutRef} className="mb-5">WORKS AROUND YOU</div>
             <img src={MobileTree} alt="" />
           </div>
 
@@ -103,6 +107,7 @@ function App() {
             </Paper>
           </motion.div>
 
+          <div>FILLER</div>
         </div >
 
 
