@@ -9,7 +9,7 @@ import TerminalIcon from '@mui/icons-material/Terminal';
 export default function Navbar() {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" style={{ backgroundColor: 'rgba(0, 0, 0, 0)' }}>
+      <AppBar position="static" color="transparent">
         <Toolbar>
           <div
             size="large"
