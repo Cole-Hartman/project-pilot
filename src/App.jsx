@@ -107,6 +107,10 @@ function App() {
             ></video>
           </div>
 
+          <div className="w-full mt-24">
+            <div className="h-1 bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-70"></div>
+          </div>
+
           {/*Works Around You Section*/}
           <div className="mt-10 pt-10 mx-5" ref={aboutRef}>
             <div className="inline text-5xl 2xl:text-7xl font-bold">WORKS AROUND </div>
@@ -232,7 +236,7 @@ function App() {
             <div className="mb-5">Q&A</div>
           </div>
 
-          <div className="mx-2 md:w-4/5 2xl:text-2xl mb-24 lg:mb-0">
+          <div className="mx-2 md:w-4/5 2xl:text-2xl mb-16">
             <Accordion>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
@@ -271,8 +275,12 @@ function App() {
             </Accordion>
           </div>
 
+          <div className="w-full mb-10">
+            <div className="h-1 bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-70"></div>
+          </div>
+
           {/*Quotes Section*/}
-          <div className="mt-18 lg:mt-32 lg:mb-10 grid grid-cols-1 w-4/5 md:grid md:grid-cols-3 2xl:text-2xl">
+          <div className="mt-18 lg:mt-10 lg:mb-10 grid grid-cols-1 w-4/5 md:grid md:grid-cols-3 2xl:text-2xl">
             <motion.div
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
