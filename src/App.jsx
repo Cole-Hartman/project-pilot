@@ -188,9 +188,9 @@ function App() {
           </div>
 
           {/*Land Jobs Section*/}
-          <div className="text-5xl font-bold mt-14 lg:mt-32 md:mt-20">LAND JOBS</div>
+          <div className="text-5xl 2xl:text-7xl font-bold mt-14 lg:mt-32 md:mt-20 2xl:mb-20">LAND JOBS</div>
 
-          <div className="w-full max-w-4xl mx-auto px-4 md:w-3/4 lg:w-2/4">
+          <div className="w-full mx-auto px-4 md:w-3/4 lg:w-2/4">
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -201,7 +201,7 @@ function App() {
                 damping: 10,
                 duration: 1.5
               }}
-              className="relative w-full h-80"
+              className="relative w-full h-80 2xl:h-96"
             >
               <BarChart
                 xAxis={[{ scaleType: 'band', data: ['group A', 'group B'] }]}
@@ -210,16 +210,29 @@ function App() {
             </motion.div>
           </div>
 
-          <div className="mx-3 mb-5 md:w-4/5">According to Code.org, students who work on personal coding projects or internships are 50% more likely to land a job in the tech industry shortly after graduation compared to those who only complete their formal coursework.</div>
+          <div className="mx-3 mb-5 md:w-4/5 2xl:text-2xl 2xl:w-3/5">According to Code.org, students who work on personal coding projects or internships are 50% more likely to land a job in the tech industry shortly after graduation compared to those who only complete their formal coursework.</div>
 
-          <Link to={'form'}><Button variant="contained">Get Started</Button></Link>
+          <motion.a
+            className="2xl:mt-7"
+            whileHover={{ scale: 1.1 }}
+            onHoverStart={e => { }}
+            onHoverEnd={e => { }}
+          >
+            <Link to={'form'}>
+              <button
+                className="w-26 h-10 text-sm xl:text-md 2xl:w-40 2xl:h-12 shadow-lg hover:shadow-xl px-2 2xl:px-4 2xl:py-2 bg-blue-600 bg-opacity-90 text-white font-semibold 2xl:text-lg rounded-md text-opacity-90 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300 mb-16 lg:mb-0"
+              >
+                GET STARTED
+              </button>
+            </Link>
+          </motion.a>
 
           {/*---- QandA Section ----*/}
-          <div className="mx-3 text-5xl font-bold lg:mt-28">
+          <div className="mx-3 text-5xl 2xl:text-7xl font-bold lg:mt-28">
             <div className="mb-5">Q&A</div>
           </div>
 
-          <div className="mx-2 md:w-4/5">
+          <div className="mx-2 md:w-4/5 2xl:text-2xl mb-24 lg:mb-0">
             <Accordion>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
@@ -259,7 +272,7 @@ function App() {
           </div>
 
           {/*Quotes Section*/}
-          <div className="mt-18 lg:mt-32 lg:mb-10 grid grid-cols-1 w-4/5 md:grid md:grid-cols-3">
+          <div className="mt-18 lg:mt-32 lg:mb-10 grid grid-cols-1 w-4/5 md:grid md:grid-cols-3 2xl:text-2xl">
             <motion.div
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
@@ -267,7 +280,7 @@ function App() {
             >
               <Paper elevation={3} className="my-2 mx-2 w-auto px-2 py-1 text-left">
                 I was able to find a project that was within my skill level but also pushed my boundaries.
-                <div className="mt-2 text-blue-500 text-opacity-90 text-sm">Cole Hartman <br /> Student, CSULB</div>
+                <div className="mt-2 text-blue-500 text-opacity-90 text-sm 2xl:text-lg">Cole Hartman <br /> Student, CSULB</div>
               </Paper>
             </motion.div>
 
@@ -278,7 +291,7 @@ function App() {
             >
               <Paper elevation={3} className="my-2 mx-2 w-auto px-2 py-1 text-left">
                 Easy to use
-                <div className="mt-2 text-blue-500 text-opacity-90 text-sm">Cole Hartman <br /> Student, CSULB</div>
+                <div className="mt-2 text-blue-500 text-opacity-90 text-sm 2xl:text-lg">Cole Hartman <br /> Student, CSULB</div>
               </Paper>
             </motion.div>
 
@@ -289,26 +302,26 @@ function App() {
             >
               <Paper elevation={3} className="my-2 mx-2 w-auto px-2 py-1 text-left">
                 I got the idea for my first web scraping project here!
-                <div className="mt-2 text-blue-500 text-opacity-90 text-sm">Cole Hartman <br /> Student, CSULB</div>
+                <div className="mt-2 text-blue-500 text-opacity-90 text-sm 2xl:text-lg">Cole Hartman <br /> Student, CSULB</div>
               </Paper>
             </motion.div>
           </div>
 
           {/*Footer Section*/}
-          <div className="border h-32 md:h-28 w-full mt-10 grid grid-cols-3 md:grid-cols-4">
-            <div className="col-span-2 flex flex-col items-left text-left pl-5 lg:w-3/4 border">
+          <div className="h-32 md:h-28 w-full mt-10 grid grid-cols-3 md:grid-cols-4 2xl:text-lg md:mb-10">
+            <div className="col-span-2 flex flex-col items-left text-left pl-5 sm:pl-14 lg:pl-28 xl:pl-44 lg:w-3/4 2xl:w-full">
               <div className="font-bold flex gap-3 pb-1">
                 <TerminalIcon style={{ color: '#3B82F6' }} />
                 Project Pilot
               </div>
-              <div>
+              <div className="text-sm sm:text-md xl:text-lg 2xl:w-3/4">
                 Our mission is to give future tech leaders direction, standardization, consistency and transparency.
               </div>
             </div>
-            <div className="border hidden md:block"></div>
-            <div className="flex flex-col text-left">
+            <div className="hidden md:block"></div>
+            <div className="flex flex-col text-left pl-10 lg:pl-0">
               <div className="font-bold">Links</div>
-              <a href="https://www.linkedin.com/in/coleahartman/" target="_blank">LinkedIn</a>
+              <a href="https://www.linkedin.com/in/coleahartman/" target="_blank" className="text-sm sm:text-md xl:text-lg">LinkedIn</a>
             </div>
           </div>
 
