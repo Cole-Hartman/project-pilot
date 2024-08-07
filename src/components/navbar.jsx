@@ -18,10 +18,10 @@ export default function Navbar() {
             aria-label="menu"
             sx={{ mr: 2 }}
           >
-            <TerminalIcon style={{ color: '#3B82F6' }} />
+            <TerminalIcon style={{ color: '#3B82F6' }} fontSize={'large'} />
           </div>
           <Typography component="div" sx={{ flexGrow: 1 }} />
-          <Button color="inherit">Project Pilot</Button>
+          <Button color="inherit" size='large'>Project Pilot</Button>
         </Toolbar>
       </AppBar>
     </Box >

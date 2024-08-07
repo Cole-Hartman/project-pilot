@@ -37,8 +37,8 @@ function App() {
               bounce: 0.3
             }}
           >
-            <div className="text-5xl font-bold mb-4">YOUR DREAM PROJECT</div>
-            <div className="text-5xl font-bold text-blue-500">STARTS HERE</div>
+            <div className="text-5xl 2xl:text-7xl font-bold mb-4">YOUR DREAM PROJECT</div>
+            <div className="text-5xl 2xl:text-7xl font-bold text-blue-500">STARTS HERE</div>
           </motion.div>
           <motion.div
             className="mx-3 my-2"
@@ -51,13 +51,13 @@ function App() {
             }}>
             <div className="text-lg px-2 mt-3 flex flex-col justify-center items-center">
               <div className="md:w-2/3">
-                <div className="mb-2 inline">Find Personalized CS project Ideas tailored against your current </div>
-                <div className="text-blue-500 inline">skill level, </div>
-                <div className="inline">and</div>
-                <div className="text-blue-500 inline"> ambition.</div>
+                <div className="mb-2 inline 2xl:text-2xl">Find Personalized CS project Ideas tailored against your current </div>
+                <div className="text-blue-500 inline 2xl:text-2xl">skill level, </div>
+                <div className="inline 2xl:text-2xl">and</div>
+                <div className="text-blue-500 inline 2xl:text-2xl"> ambition.</div>
               </div>
 
-              <div className="pt-3 md:w-3/4">
+              <div className="pt-3 md:w-3/4 2xl:text-2xl">
                 <div className="inline">Build around structured prompt engineering designed for </div>
                 <div className="inline text-blue-500">optimal AI comprehension</div>
               </div>
@@ -65,16 +65,38 @@ function App() {
           </motion.div>
 
           <div className="mx-2 my-5 flex gap-5">
-            <Link to={'form'}><Button variant="contained">Get Started</Button></Link>
-            <Button variant="outlined" onClick={() => {
-              aboutRef.current?.scrollIntoView({ behavior: 'smooth' })
-            }}
+            <motion.a
+              whileHover={{ scale: 1.1 }}
+              onHoverStart={e => { }}
+              onHoverEnd={e => { }}
             >
-              About
-            </Button>
+              <Link to={'form'}>
+                <button
+                  className="w-26 h-10 text-sm xl:text-md 2xl:w-40 2xl:h-12 shadow-lg hover:shadow-xl px-2 2xl:px-4 2xl:py-2 bg-blue-600 bg-opacity-90 text-white font-semibold 2xl:text-lg rounded-md text-opacity-90 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300"
+                >
+                  GET STARTED
+                </button>
+              </Link>
+            </motion.a>
+
+            <motion.a
+              whileHover={{ scale: 1.1 }}
+              onHoverStart={e => { }}
+              onHoverEnd={e => { }}
+            >
+              <button
+                className="h-10 2xl:w-36 2xl:h-12 shadow-lg hover:shadow-xl px-4 py-2 bg-opacity-0 border border-blue-300 text-blue-300 text-opacity-90 font-semibold text-sm xl:text-md 2xl:text-lg rounded-md hover:border-blue-400 hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-300" onClick={() => {
+                  aboutRef.current?.scrollIntoView({ behavior: 'smooth' })
+                }}
+              >
+                ABOUT
+              </button>
+            </motion.a>
+
+
           </div>
 
-          <div className="mx-5 mt-3 md:w-2/3">
+          <div className="mx-5 mt-3 md:w-2/3 2xl:w-1/2">
             <video
               src="https://framerusercontent.com/assets/Og1qbbFDYhzyJkDS765JkhHMgeQ.mp4"
               loop
@@ -87,83 +109,88 @@ function App() {
 
           {/*Works Around You Section*/}
           <div className="mt-10 pt-10 mx-5" ref={aboutRef}>
-            <div className="inline text-5xl font-bold">WORKS AROUND </div>
-            <div className="inline text-5xl font-bold text-blue-500">YOU</div>
+            <div className="inline text-5xl 2xl:text-7xl font-bold">WORKS AROUND </div>
+            <div className="inline 2xl:block text-5xl 2xl:text-7xl font-bold text-blue-500">YOU</div>
           </div>
 
-          <div className="mt-2 mx-2 text-center md:w-3/4">Project Pilot is a tool build around refined and structured prompt engineering that allows you to easily communicate your ideas and needs for optimal AI comprehension to only generate tailored and industry standard computer science project ideas for you.</div>
-          <div className="mt-2 mx-2 text-center mb-5 md:w-1/2">Designed for students, hobbyists, and professionals alike, our app transforms the way you brainstorm and plan your next big project.</div>
+          <div className="mt-2 mx-2 text-center 2xl:text-2xl md:w-3/4">Project Pilot is a tool build around refined and structured prompt engineering that allows you to easily communicate your ideas and needs for optimal AI comprehension to only generate tailored and industry standard computer science project ideas for you.</div>
+          <div className="mt-2 mx-2 text-center 2xl:text-2xl mb-5 md:w-1/2">Designed for students, hobbyists, and professionals alike, our app transforms the way you brainstorm and plan your next big project.</div>
 
-          <div className="ml-5 mr-4 md:w-1/2">
-            <img src={MobileTree} alt="" />
-          </div>
+          <div className="flex flex-col justify-center items-center mt-10 text-center xl:flex-row xl:mx-10">
+            <div className="ml-5 mr-4 md:w-1/2 lg:w-2/5 lg:mb-10 xl:w-2/6 2xl:w-1/4">
+              <img src={MobileTree} alt="" />
+            </div>
 
-          <div className="md:w-4/5 mx-1">
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ amount: 0.4 }} // Trigger animation once when 20% of the element is visible
-              transition={{
-                type: 'spring',
-                stiffness: 50,
-                damping: 10,
-                duration: 2,
-                bounce: 0.2
-              }}
-            >
-              <Paper className="mx-2 mt-8 px-3 py-3">
-                <ul className="text-left mt-2">
-                  <li className="font-bold">Effortless Idea Generation:</li>
-                  <li className="pl-3">Skip the hassle of sluggishly prompting AI to generate a project for you while typing out every detail about your skill level and your project needs. With just a few clicks, you can generate highly specific and relevant project ideas with maximum efficiency and accuracy.</li>
-                </ul>
-              </Paper>
-            </motion.div>
+            <div className="md:w-4/5 2xl:w-3/5">
+              <motion.div
+                className="2xl:flex justify-center 2xl:h-60"
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ amount: 0.4 }} // Trigger animation once when 20% of the element is visible
+                transition={{
+                  type: 'spring',
+                  stiffness: 50,
+                  damping: 10,
+                  duration: 2,
+                  bounce: 0.2
+                }}
+              >
+                <Paper className="mx-2 mt-8 px-3 py-3 xl:my-5 2xl:text-2xl 2xl:w-3/4">
+                  <ul className="text-left mt-2">
+                    <li className="font-bold">Effortless Idea Generation:</li>
+                    <li className="pl-3">Skip the hassle of sluggishly prompting AI to generate a project for you while typing out every detail about your skill level and your project needs. With just a few clicks, you can generate highly specific and relevant project ideas with maximum efficiency and accuracy.</li>
+                  </ul>
+                </Paper>
+              </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, x: [-50] }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ amount: 0.4 }} // Trigger animation once when 20% of the element is visible
-              transition={{
-                type: 'spring',
-                stiffness: 50,
-                damping: 10,
-                duration: 2,
-                bounce: 0.2
-              }}
-            >
-              <Paper className="mx-2 mt-3 px-3 py-3">
-                <ul className="text-left mt-2">
-                  <li className="font-bold">Save Time and Effort:</li>
-                  <li className="pl-3">Focus on bringing your ideas to life rather than struggling with brainstorming. Our app takes care of the ideation process so you can spend more time on what matters most—building and creating.</li>
-                </ul>
-              </Paper>
-            </motion.div>
+              <motion.div
+                className="2xl:flex justify-center 2xl:h-60"
+                initial={{ opacity: 0, x: [-50] }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ amount: 0.4 }} // Trigger animation once when 20% of the element is visible
+                transition={{
+                  type: 'spring',
+                  stiffness: 50,
+                  damping: 10,
+                  duration: 2,
+                  bounce: 0.2
+                }}
+              >
+                <Paper className="mx-2 mt-3 px-3 py-3 xl:my-5 2xl:text-2xl 2xl:w-3/4">
+                  <ul className="text-left mt-2">
+                    <li className="font-bold">Save Time and Effort:</li>
+                    <li className="pl-3">Focus on bringing your ideas to life rather than struggling with brainstorming. Our app takes care of the ideation process so you can spend more time on what matters most—building and creating.</li>
+                  </ul>
+                </Paper>
+              </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ amount: 0.4 }} // Trigger animation once when 20% of the element is visible
-              transition={{
-                type: 'spring',
-                stiffness: 50,
-                damping: 10,
-                duration: 2,
-                bounce: 0.2
-              }}
-            >
-              <Paper className="mx-2 mt-3 px-3 py-3">
-                <ul className="text-left mt-2">
-                  <li className="font-bold">Industry-Relevant Insights:</li>
-                  <li className="pl-3">Stay ahead of the curve with project ideas that incorporate current tech job market trends and industry standards. We use up-to-date data to ensure your projects are not only innovative but also aligned with what’s relevant and sought after in the tech world.</li>
-                </ul>
-              </Paper>
-            </motion.div>
+              <motion.div
+                className="2xl:flex justify-center 2xl:h-60"
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ amount: 0.4 }} // Trigger animation once when 20% of the element is visible
+                transition={{
+                  type: 'spring',
+                  stiffness: 50,
+                  damping: 10,
+                  duration: 2,
+                  bounce: 0.2
+                }}
+              >
+                <Paper className="mx-2 mt-3 px-3 py-3 xl:mt-5 2xl:text-2xl 2xl:w-3/4">
+                  <ul className="text-left mt-2">
+                    <li className="font-bold">Industry-Relevant Insights:</li>
+                    <li className="pl-3">Stay ahead of the curve with project ideas that incorporate current tech job market trends and industry standards. We use up-to-date data to ensure your projects are not only innovative but also aligned with what’s relevant and sought after in the tech world.</li>
+                  </ul>
+                </Paper>
+              </motion.div>
+            </div>
           </div>
 
           {/*Land Jobs Section*/}
-          <div className="text-5xl font-bold mt-14 md:mt-20">LAND JOBS</div>
+          <div className="text-5xl font-bold mt-14 lg:mt-32 md:mt-20">LAND JOBS</div>
 
-          <div className="w-full max-w-4xl mx-auto px-4 md:w-3/4">
+          <div className="w-full max-w-4xl mx-auto px-4 md:w-3/4 lg:w-2/4">
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -188,7 +215,7 @@ function App() {
           <Link to={'form'}><Button variant="contained">Get Started</Button></Link>
 
           {/*---- QandA Section ----*/}
-          <div className="mx-3 text-5xl font-bold mt-16">
+          <div className="mx-3 text-5xl font-bold lg:mt-28">
             <div className="mb-5">Q&A</div>
           </div>
 
@@ -232,7 +259,7 @@ function App() {
           </div>
 
           {/*Quotes Section*/}
-          <div className="mt-10 grid grid-cols-1 w-4/5 md:grid md:grid-cols-3">
+          <div className="mt-18 lg:mt-32 lg:mb-10 grid grid-cols-1 w-4/5 md:grid md:grid-cols-3">
             <motion.div
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
@@ -269,7 +296,7 @@ function App() {
 
           {/*Footer Section*/}
           <div className="border h-32 md:h-28 w-full mt-10 grid grid-cols-3 md:grid-cols-4">
-            <div className="col-span-2 flex flex-col items-left text-left pl-5 border">
+            <div className="col-span-2 flex flex-col items-left text-left pl-5 lg:w-3/4 border">
               <div className="font-bold flex gap-3 pb-1">
                 <TerminalIcon style={{ color: '#3B82F6' }} />
                 Project Pilot
