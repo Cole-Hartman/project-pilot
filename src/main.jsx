@@ -12,7 +12,6 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import App from './App.jsx'
 import GetStarted from './routes/GetStarted.jsx'
 import Profile from './routes/Profile.jsx'
-import SignIn from './routes/sign-in.jsx'
 
 
 const router = createBrowserRouter([

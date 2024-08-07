@@ -9,11 +9,9 @@ export default function Navigation() {
 
   return (
     <nav>
-      <ul>
-        <li><a href="/">Home</a></li>
-        <button><Link to={'profile'}>Profile</Link></button>
-        <li><button onClick={handleSignOut}>Sign Out</button></li>
-      </ul>
+      <button><Link to={'/profile'}>Profile</Link></button>
+      <div></div>
+      <button onClick={handleSignOut}>Sign Out</button>
     </nav>
   )
 }
