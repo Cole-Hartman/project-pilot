@@ -10,7 +10,9 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import App from './App.jsx'
-import Form from './routes/form.jsx'
+import GetStarted from './routes/GetStarted.jsx'
+import Profile from './routes/Profile.jsx'
+import SignIn from './routes/sign-in.jsx'
 
 
 const router = createBrowserRouter([
@@ -19,9 +21,14 @@ const router = createBrowserRouter([
     element: <App />
   },
   {
-    path: "/form",
-    element: <Form />,
+    path: "/getstarted",
+    element: <GetStarted />,
+  },
+  {
+    path: "/profile",
+    element: <Profile />
   }
+
 ])
 
 function Root() {
