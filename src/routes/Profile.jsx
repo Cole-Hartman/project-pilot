@@ -14,31 +14,39 @@ import {
 } from '@mui/material';
 
 function ProfilePage() {
-  const [session, setSession] = useState(null);
+  const [user, setUser] = useState(null);
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState(false);
   const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'info' });
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      if (session) fetchProfile(session.user.id);
-    });
+    fetchUserAndProfile();
   }, []);
 
-  async function fetchProfile(userId) {
+  async function fetchUserAndProfile() {
     setLoading(true);
-    const { data, error } = await supabase
-      .from('profiles')
-      .select('*')
-      .eq('id', userId)
-      .single();
+    const { data: { user }, error: userError } = await supabase.auth.getUser();
 
-    if (error) {
-      console.error('Error fetching profile:', error);
-    } else {
-      setProfile(data);
+    if (userError) {
+      console.error('Error fetching user:', userError);
+      setLoading(false);
+      return;
+    }
+
+    if (user) {
+      const { data: profile, error: profileError } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', user.id)
+        .single();
+
+      if (profileError) {
+        console.error('Error fetching profile:', profileError);
+      } else {
+        setUser(user);
+        setProfile(profile);
+      }
     }
     setLoading(false);
   }
@@ -49,7 +57,7 @@ function ProfilePage() {
     const { error } = await supabase
       .from('profiles')
       .update(profile)
-      .eq('id', session.user.id);
+      .eq('id', user.id);
 
     if (error) {
       showSnackbar(error.message, 'error');
@@ -72,7 +80,7 @@ function ProfilePage() {
   };
 
   if (loading) return <Typography>Loading...</Typography>;
-  if (!profile) return <Typography>No profile data found</Typography>;
+  if (!user || !profile) return <Typography>No user data found</Typography>;
 
   return (
     <Container maxWidth="md">
@@ -81,18 +89,15 @@ function ProfilePage() {
           <Avatar
             sx={{ width: 100, height: 100, mb: 2 }}
             src={profile.avatar_url}
-            alt={profile.username}
           />
-          <Typography variant="h4" gutterBottom>
-            {profile.username || 'Username not set'}
-          </Typography>
+
           <Typography variant="body1" color="textSecondary">
-            {session?.user?.email}
+            {user.email}
           </Typography>
         </Box>
 
         <form onSubmit={updateProfile}>
-          <Grid container spacing={3}>
+          <Grid container spacing={3} className="flex items-center justify-center">
             <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
@@ -102,15 +107,7 @@ function ProfilePage() {
                 disabled={!editing}
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                fullWidth
-                label="Username"
-                value={profile.username || ''}
-                onChange={(e) => setProfile({ ...profile, username: e.target.value })}
-                disabled={!editing}
-              />
-            </Grid>
+
             <Grid item xs={12}>
               <TextField
                 fullWidth

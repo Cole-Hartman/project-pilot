@@ -11,10 +11,12 @@ import TerminalIcon from '@mui/icons-material/Terminal';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { BarChart } from '@mui/x-charts/BarChart';
 import { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
 function App() {
   const aboutRef = useRef(null);
+  const navigate = useNavigate();
 
   return (
     <>
@@ -66,35 +68,29 @@ function App() {
           </motion.div>
 
           <div className="mx-2 my-5 flex gap-5">
-            <motion.a
+            <motion.div
               whileHover={{ scale: 1.1 }}
-              onHoverStart={e => { }}
-              onHoverEnd={e => { }}
-            >
-              <Link to={'getstarted'}>
-                <button
-                  className="w-26 h-10 text-sm xl:text-md 2xl:w-40 2xl:h-12 shadow-lg hover:shadow-xl px-2 2xl:px-4 2xl:py-2 bg-blue-600 bg-opacity-90 text-white font-semibold 2xl:text-lg rounded-md text-opacity-90 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300"
-                >
-                  GET STARTED
-                </button>
-              </Link>
-            </motion.a>
-
-            <motion.a
-              whileHover={{ scale: 1.1 }}
-              onHoverStart={e => { }}
-              onHoverEnd={e => { }}
             >
               <button
-                className="h-10 2xl:w-36 2xl:h-12 shadow-lg hover:shadow-xl px-4 py-2 bg-opacity-0 border border-blue-300 text-blue-300 text-opacity-90 font-semibold text-sm xl:text-md 2xl:text-lg rounded-md hover:border-blue-400 hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-300" onClick={() => {
+                onClick={() => navigate('/getstarted')}
+                className="w-26 h-10 text-sm xl:text-md 2xl:w-40 2xl:h-12 shadow-lg hover:shadow-xl px-2 2xl:px-4 2xl:py-2 bg-blue-600 bg-opacity-90 text-white font-semibold 2xl:text-lg rounded-md text-opacity-90 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300 mb-16 lg:mb-0"
+              >
+                GET STARTED
+              </button>
+            </motion.div>
+
+            <motion.div
+              whileHover={{ scale: 1.1 }}
+            >
+              <button
+                className="h-10 2xl:w-36 2xl:h-12 shadow-lg hover:shadow-xl px-4 py-2 bg-opacity-0 border border-blue-300 text-blue-300 text-opacity-90 font-semibold text-sm xl:text-md 2xl:text-lg rounded-md hover:border-blue-400 hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-300"
+                onClick={() => {
                   aboutRef.current?.scrollIntoView({ behavior: 'smooth' })
                 }}
               >
                 ABOUT
               </button>
-            </motion.a>
-
-
+            </motion.div>
           </div>
 
           <div className="mx-5 mt-3 md:w-2/3 2xl:w-1/2">
@@ -217,20 +213,17 @@ function App() {
 
           <div className="mx-3 mb-5 md:w-4/5 2xl:text-2xl 2xl:w-3/5">According to Code.org, students who work on personal coding projects or internships are 50% more likely to land a job in the tech industry shortly after graduation compared to those who only complete their formal coursework.</div>
 
-          <motion.a
+          <motion.div
             className="2xl:mt-7"
             whileHover={{ scale: 1.1 }}
-            onHoverStart={e => { }}
-            onHoverEnd={e => { }}
           >
-            <Link to={'getstarted'}>
-              <button
-                className="w-26 h-10 text-sm xl:text-md 2xl:w-40 2xl:h-12 shadow-lg hover:shadow-xl px-2 2xl:px-4 2xl:py-2 bg-blue-600 bg-opacity-90 text-white font-semibold 2xl:text-lg rounded-md text-opacity-90 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300 mb-16 lg:mb-0"
-              >
-                GET STARTED
-              </button>
-            </Link>
-          </motion.a>
+            <button
+              onClick={() => navigate('/getstarted')}
+              className="w-26 h-10 text-sm xl:text-md 2xl:w-40 2xl:h-12 shadow-lg hover:shadow-xl px-2 2xl:px-4 2xl:py-2 bg-blue-600 bg-opacity-90 text-white font-semibold 2xl:text-lg rounded-md text-opacity-90 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300 mb-16 lg:mb-0"
+            >
+              GET STARTED
+            </button>
+          </motion.div>
 
           {/*---- QandA Section ----*/}
           <div className="mx-3 text-5xl 2xl:text-7xl font-bold lg:mt-28">
