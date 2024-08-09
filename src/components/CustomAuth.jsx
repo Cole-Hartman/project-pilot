@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { supabase } from '../config/supabaseClient';
 import {
   Button,
@@ -11,102 +11,59 @@ import {
   Alert
 } from '@mui/material';
 import GoogleIcon from '@mui/icons-material/Google';
-import { useNavigate } from 'react-router-dom';
 
 function CustomAuth() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'info' });
-  const [signedIn, setSignedIn] = useState(false);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
-      console.log("Auth state changed:", event, session);
-      if (session) {
-        setSignedIn(true);
-      } else {
-        setSignedIn(false);
-      }
-    });
-
-    return () => {
-      if (authListener && authListener.unsubscribe) {
-        authListener.unsubscribe();
-      }
-    };
-  }, []);
-
-  useEffect(() => {
-    if (signedIn) {
-      console.log("Attempting to navigate to /getstarted");
-      navigate('/getstarted', { replace: true });
-    }
-  }, [signedIn, navigate]);
-
-  const fetchProfile = async (userId) => {
-    const { data, error } = await supabase
-      .from('profiles')
-      .select('*')
-      .eq('id', userId)
-      .single();
-
-    if (error) {
-      console.error("Error fetching profile:", error);
-      return null;
-    }
-    return data;
-  };
 
   const handleSignIn = async (e) => {
     e.preventDefault();
     setLoading(true);
-    console.log("Attempting to sign in...");
-    const { data: { user }, error } = await supabase.auth.signInWithPassword({ email, password });
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
     if (error) {
-      console.error("Sign in error:", error);
       showSnackbar(error.message, 'error');
-    } else if (user) {
-      console.log("Sign in successful:", user);
-      const profile = await fetchProfile(user.id);
-      if (profile) {
-        console.log("Profile loaded:", profile);
-        setSignedIn(true);
-      } else {
-        console.error("Failed to load profile");
-        showSnackbar("Signed in, but failed to load profile", 'warning');
-      }
+    } else if (data && data.user) {
+      showSnackbar('Signed in successfully', 'success');
+      // You can add additional logic here for successful sign-in
+      // For example, you might want to fetch user data or redirect
     }
     setLoading(false);
   };
 
   const handleSignUp = async () => {
     setLoading(true);
-    const { data, error } = await supabase.auth.signUp({ email, password });
-    if (error) {
-      console.error("Sign up error:", error);
-      showSnackbar(error.message, 'error');
-    } else {
-      console.log("Sign up successful:", data);
+    try {
+      const { error } = await supabase.auth.signUp({ email, password });
+      if (error) throw error;
       showSnackbar('Check your email for the confirmation link', 'success');
+    } catch (error) {
+      showSnackbar(error.message, 'error');
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   const handleGoogleSignIn = async () => {
     setLoading(true);
-    const { data, error } = await supabase.auth.signInWithOAuth({
-      provider: 'google',
-    });
-    if (error) {
-      console.error("Google sign in error:", error);
+    try {
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: `${window.location.origin}/getstarted`
+        }
+      });
+      if (error) {
+        throw error;
+      }
+    } catch (error) {
       showSnackbar(error.message, 'error');
-    } else {
-      console.log("Google sign in initiated:", data);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
+
 
   const showSnackbar = (message, severity) => {
     setSnackbar({ open: true, message, severity });
