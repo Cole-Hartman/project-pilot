@@ -28,14 +28,14 @@ export default function NavbarButtons() {
 
   if (!session) {
     return (
-      <button onClick={() => navigate('/getstarted')} className="pr-3">
+      <button onClick={() => navigate('/getstarted')} className="pr-3 text-lg">
         Log In
       </button>
     );
   }
 
   return (
-    <div className='text-lg'>
+    <div className='text-lg pr-3'>
       <button
         onClick={() => navigate('/profile')}
         className="pr-3"
