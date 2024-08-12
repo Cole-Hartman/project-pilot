@@ -14,14 +14,13 @@ export default function Completion({ prompt }) {
           model: "gpt-4o-mini",
         });
         setCompletion(result.choices[0]);
-        console.log(result.choices[0].message.content)
       } catch (error) {
         console.error("Error fetching completion:", error);
       }
     }
 
     fetchCompletion();
-  }, []);
+  }, [prompt]);
 
   return (
     <>

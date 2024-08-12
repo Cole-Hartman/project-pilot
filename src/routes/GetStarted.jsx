@@ -28,8 +28,11 @@ export default function Form() {
             >
               HOME
             </button>
-            <button className='mt-20 text-xl border p-5 rounded-xl bg-black' onClick={() => { setPrompt("How to center a div") }}>
+            <button className='mt-20 text-xl border p-5 rounded-xl bg-black' onClick={() => { setPrompt("How to center a div"), console.log("fetching response") }}>
               How to center a div
+            </button>
+            <button className='mt-2 text-xl border p-5 rounded-xl bg-black' onClick={() => { setPrompt("How to drive a car"), console.log("fetching response") }}>
+              How to drive a car
             </button>
             <Completion prompt={prompt} />
           </div>
