@@ -9,6 +9,10 @@ export default function Form() {
   const [prompt, setPrompt] = useState(" ");
   const [selectedLanguages, setSelectedLanguages] = useState([]);
   const [selectedTraits, setSelectedTraits] = useState([]);
+  const [selectedGoals, setSelectedGoals] = useState([]);
+  const [selectedTechStack, setSelectedTechStack] = useState([]);
+
+
 
   {/*Transition Presets*/ }
   const fadeTransition = {
@@ -50,6 +54,42 @@ export default function Form() {
       setPrompt(prompt + "I wouldn't describe myself as a developer . ");
     } else {
       setPrompt(prompt + `I would describe myself as a developer with the following traits: ${selectedTraits.join(', ')}. `);
+    }
+    nextStep();
+  };
+
+  {/* Handle Goal Select */ }
+  const handleGoalToggle = (goal) => {
+    setSelectedGoals(prevGoals =>
+      prevGoals.includes(goal)
+        ? prevGoals.filter(g => g !== goal)
+        : [...prevGoals, goal]
+    );
+  };
+
+  const handleGoalConfirm = () => {
+    if (selectedGoals.length === 0) {
+      setPrompt(prompt + "I don't have any specific goals for this project. ");
+    } else {
+      setPrompt(prompt + `My goals for this project are: ${selectedGoals.join(', ')}. `);
+    }
+    nextStep();
+  };
+
+  {/* Handle Tech Stack Select */ }
+  const handleTechStackToggle = (tech) => {
+    setSelectedTechStack(prevTechStack =>
+      prevTechStack.includes(tech)
+        ? prevTechStack.filter(t => t !== tech)
+        : [...prevTechStack, tech]
+    );
+  };
+
+  const handleTechStackConfirm = () => {
+    if (selectedTechStack.length === 0) {
+      setPrompt(prompt + "I don't have a specific tech stack in mind. ");
+    } else {
+      setPrompt(prompt + `I'm interested in using the following technologies: ${selectedTechStack.join(', ')}. `);
     }
     nextStep();
   };
@@ -335,7 +375,7 @@ export default function Form() {
             <motion.div key="step5" {...fadeTransition} className='flex flex-col justify-center items-center'>
               <div className="text-2xl 2xl:text-3xl font-bold mb-10">How would you describe yourself as a developer?</div>
               <div className="flex flex-wrap justify-center gap-4 mb-10">
-                {['Analytical', 'Innovative', 'Collaborative', 'Efficient', 'Curious', 'Adaptive', 'User-focused', 'Experiennced', 'Passionate'].map(trait => (
+                {['Analytical', 'Innovative', 'Collaborative', 'Efficient', 'Curious', 'Adaptive', 'User-focused', 'Experienced', 'Passionate'].map(trait => (
                   <motion.button
                     key={trait}
                     whileHover={{ scale: 1.05 }}
@@ -359,74 +399,179 @@ export default function Form() {
         );
       case 6:
         return (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            key="step6"
+            className='flex flex-col justify-center items-center'
+          >
+            <h2 className="text-6xl 2xl:text-8xl font-bold mb-28 text-center">ABOUT YOUR PROJECT</h2>
+            <div className="text-2xl 2xl:text-3xl font-bold mb-10">What do you preffer working on?</div>
+            <div className="flex flex-row gap-4">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                className="bg-opacity-50 mt-20 mb-2 text-xl p-5 rounded-xl bg-blue-500 hover:bg-opacity-100 text-center cursor-pointer"
+                onClick={() => {
+                  setPrompt(prompt + "I enjoy working on the frontend. ");
+                  nextStep();
+                }}
+              >
+                Frontend
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                className="bg-opacity-50 mt-20 mb-2 text-xl p-5 rounded-xl bg-blue-500 hover:bg-opacity-100 text-center cursor-pointer"
+                onClick={() => {
+                  setPrompt(prompt + "I enjoy working on the backend. ");
+                  nextStep();
+                }}
+              >
+                Backend
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                className="bg-opacity-50 mt-20 mb-2 text-xl p-5 rounded-xl bg-blue-500 hover:bg-opacity-100 text-center cursor-pointer"
+                onClick={() => {
+                  setPrompt(prompt + "I enjoy working full-stack. ");
+                  nextStep();
+                }}
+              >
+                Full-Stack
+              </motion.button>
+
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                className="bg-opacity-50 mt-20 mb-2 text-xl p-5 rounded-xl bg-blue-500 hover:bg-opacity-100 text-center cursor-pointer"
+                onClick={() => {
+                  setPrompt(prompt + "I'm not quite sure if I would rather work on frontend, backend, or fullstack for this project. ");
+                  nextStep();
+                }}
+              >
+                Not Sure
+              </motion.button>
+            </div>
+          </motion.div>
+        );
+      case 7:
+        return (
           <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{
-                duration: 1,
-                bounce: 0.3
-              }}
-            >
-              <h2 className="text-6xl 2xl:text-8xl font-bold mb-28 text-center">ABOUT YOUR PROJECT</h2>
-            </motion.div >
-            <motion.div key="step1" {...fadeTransition} className='flex flex-col justify-center items-center'>
-              <div className="text-2xl 2xl:text-3xl font-bold">Bruh?</div>
+            <h2 className="text-6xl 2xl:text-8xl font-bold mb-28 text-center">ABOUT YOUR PROJECT</h2>
+            <motion.div key="step7" {...fadeTransition} className='flex flex-col justify-center items-center'>
+              <div className="text-2xl 2xl:text-3xl font-bold mb-10">What are some potential goals for this project?</div>
+              <div className="flex flex-wrap justify-center gap-4 mb-10">
+                {['Learning', 'Inspiration', 'Exploring', 'Resume Building', 'Entrepreneurship', 'Networking', 'Contribution'].map(goal => (
+                  <motion.button
+                    key={goal}
+                    whileHover={{ scale: 1.05 }}
+                    className={`bg-opacity-50 mb-2 text-xl p-5 rounded-xl ${selectedGoals.includes(goal) ? 'bg-green-500' : 'bg-blue-500'
+                      } hover:bg-opacity-100 text-center cursor-pointer`}
+                    onClick={() => handleGoalToggle(goal)}
+                  >
+                    {goal}
+                  </motion.button>
+                ))}
+              </div>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                className="bg-opacity-50 mt-10 mb-2 text-xl p-5 rounded-xl bg-yellow-500 hover:bg-opacity-100 text-center cursor-pointer"
+                onClick={handleGoalConfirm}
+              >
+                Continue
+              </motion.button>
+            </motion.div>
+          </>
+        );
+      case 8:
+        return (
+          <>
+            <h2 className="text-6xl 2xl:text-8xl font-bold mb-28 text-center">ABOUT YOUR PROJECT</h2>
+            <motion.div key="step8" {...fadeTransition} className='flex flex-col justify-center items-center'>
+              <div className="text-2xl 2xl:text-3xl font-bold mb-10">Preffered Project Scale</div>
               <div className="flex flex-row gap-4">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   className="bg-opacity-50 mt-20 mb-2 text-xl p-5 rounded-xl bg-blue-500 hover:bg-opacity-100 text-center cursor-pointer"
                   onClick={() => {
-                    setPrompt(prompt + "I have no coding experience. ");
+                    setPrompt(prompt + "I would prefer a small personal project. ");
                     nextStep();
                   }}
                 >
-                  No Coding Experience
+                  Small Personal Project
                 </motion.button>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   className="bg-opacity-50 mt-20 mb-2 text-xl p-5 rounded-xl bg-blue-500 hover:bg-opacity-100 text-center cursor-pointer"
                   onClick={() => {
-                    setPrompt(prompt + "I have 0-1 years of coding experience. ");
+                    setPrompt(prompt + "I would prefer a medium-sized project. ");
                     nextStep();
                   }}
                 >
-                  0-1 Years
+                  Medium-Sized Application
                 </motion.button>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   className="bg-opacity-50 mt-20 mb-2 text-xl p-5 rounded-xl bg-blue-500 hover:bg-opacity-100 text-center cursor-pointer"
                   onClick={() => {
-                    setPrompt(prompt + "I have 2-4 years of coding experience. ");
+                    setPrompt(prompt + "I would prefer a large-scale project. ");
                     nextStep();
                   }}
                 >
-                  2-4 Years
+                  Large Scale System
                 </motion.button>
 
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   className="bg-opacity-50 mt-20 mb-2 text-xl p-5 rounded-xl bg-blue-500 hover:bg-opacity-100 text-center cursor-pointer"
                   onClick={() => {
-                    setPrompt(prompt + "I have 5+ years of coding experience. ");
+                    setPrompt(prompt + "I don't have a preference for the scale of the project. ");
                     nextStep();
                   }}
                 >
-                  5+ Years
+                  No Preference
                 </motion.button>
               </div>
             </motion.div>
-          </>);
-
-
-
-
-
-
-
-      case 3:
+          </>
+        );
+      case 9:
         return (
-          <motion.div key="step3" {...fadeTransition} className='flex flex-col justify-center items-center'>
+          <>
+            <h2 className="text-6xl 2xl:text-8xl font-bold mb-28 text-center">ABOUT YOUR PROJECT</h2>
+            <motion.div key="step9" {...fadeTransition} className='flex flex-col justify-center items-center'>
+              <div className="text-2xl 2xl:text-3xl font-bold mb-10">Do you have a specific tech stack in mind?</div>
+              <div className="flex flex-wrap justify-center gap-4 mb-10">
+                {['React', 'Angular', 'Vue.js', 'Node.js', 'Django', 'Flask', 'Spring Boot', 'Laravel', 'Express.js', 'MongoDB', 'PostgreSQL', 'Docker'].map(tech => (
+                  <motion.button
+                    key={tech}
+                    whileHover={{ scale: 1.05 }}
+                    className={`bg-opacity-50 mb-2 text-xl p-5 rounded-xl ${selectedTechStack.includes(tech) ? 'bg-green-500' : 'bg-blue-500'
+                      } hover:bg-opacity-100 text-center cursor-pointer`}
+                    onClick={() => handleTechStackToggle(tech)}
+                  >
+                    {tech}
+                  </motion.button>
+                ))}
+              </div>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                className="bg-opacity-50 mt-10 mb-2 text-xl p-5 rounded-xl bg-yellow-500 hover:bg-opacity-100 text-center cursor-pointer"
+                onClick={handleTechStackConfirm}
+              >
+                Continue
+              </motion.button>
+            </motion.div>
+          </>
+        );
+
+
+
+
+
+
+      case 10:
+        return (
+          <motion.div key="step10" {...fadeTransition} className='flex flex-col justify-center items-center'>
             <h2 className="text-4xl font-bold mb-8 text-center">Your Completion</h2>
             <motion.button
               whileHover={{ scale: 1.05 }}
