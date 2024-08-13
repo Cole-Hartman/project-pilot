@@ -28,7 +28,7 @@ export default function NavbarButtons() {
 
   if (!session) {
     return (
-      <button onClick={() => navigate('/getstarted')} className="pr-3 text-lg">
+      <button onClick={() => navigate('/form')} className="pr-3 text-lg">
         Log In
       </button>
     );

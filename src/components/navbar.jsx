@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom'
 import NavbarButtons from './navbarButtons.jsx'
 
 export default function Navbar() {
-  //const navigate = useNavigate();
+  const navigate = useNavigate();
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -22,11 +22,11 @@ export default function Navbar() {
             aria-label="menu"
             sx={{ mr: 2 }}
           >
-            <TerminalIcon style={{ color: '#3B82F6' }} fontSize={'large'} />
+            <TerminalIcon onClick={() => navigate('/')} style={{ color: '#3B82F6' }} fontSize={'large'} />
           </div>
           <Typography className="" component="div" sx={{ flexGrow: 1 }} />
           <NavbarButtons />
-          <Button color="inherit" size='large'>Project Pilot</Button>
+          <Button color="inherit" size='large' onClick={() => navigate('/')}>Project Pilot</Button>
         </Toolbar>
       </AppBar>
     </Box >
