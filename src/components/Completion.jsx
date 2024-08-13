@@ -8,7 +8,7 @@ export default function Completion({ prompt }) {
   useEffect(() => {
     async function fetchCompletion() {
       try {
-        const openai = new OpenAI({ apiKey: import.meta.env.VITE_OPENAI_API_KEY, dangerouslyAllowBrowser: true });
+        //const openai = new OpenAI({ apiKey: import.meta.env.VITE_OPENAI_API_KEY, dangerouslyAllowBrowser: true });
         const result = await openai.chat.completions.create({
           messages: [{ role: "system", content: prompt }],
           model: "gpt-4o-mini",

@@ -3,18 +3,18 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '../components/navbar.jsx';
 import AuthWrapper from '../components/AuthWrapper.jsx'
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import Completion from '../components/Completion.jsx'
 
 export default function Form() {
   const [step, setStep] = useState(0);
   const [prompt, setPrompt] = useState(" ");
 
   const fadeTransition = {
-    initial: { opacity: 0, y: -50 },
+    initial: { opacity: 0, y: -40 },
     animate: { opacity: 1, y: 0 },
-    exit: { opacity: 0, y: 50 },
-    transition: { duration: 0.5 }
+    exit: { opacity: 0, y: 40 },
+    transition: { duration: 0.8 }
   };
+
 
   const nextStep = () => setStep(prevStep => prevStep + 1);
 
@@ -43,7 +43,17 @@ export default function Form() {
       case 1:
         return (
           <>
-            <h2 className="text-6xl 2xl:text-8xl font-bold mb-28 text-center">ABOUT YOU</h2>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{
+                //type: "spring",
+                duration: 1,
+                bounce: 0.3
+              }}
+            >
+              <h2 className="text-6xl 2xl:text-8xl font-bold mb-28 text-center">ABOUT YOU</h2>
+            </motion.div >
             <motion.div key="step1" {...fadeTransition} className='flex flex-col justify-center items-center'>
               <div className="text-2xl 2xl:text-3xl font-bold">How many years of coding experience do you have?</div>
               <div className="flex flex-row gap-4">
@@ -94,8 +104,17 @@ export default function Form() {
       case 2:
         return (
           <>
-            <h2 className="text-6xl 2xl:text-8xl font-bold mb-28 text-center">ABOUT YOU</h2>
-            <motion.div key="step2" {...fadeTransition} className='flex flex-col justify-center items-center'>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{
+                duration: 1,
+                bounce: 0.3
+              }}
+            >
+              <h2 className="text-6xl 2xl:text-8xl font-bold mb-28 text-center">ABOUT YOU</h2>
+            </motion.div > <motion.div key="step2" {...fadeTransition} className='flex flex-col justify-center items-center'>
               <div className="text-2xl 2xl:text-3xl font-bold">What year of college are you in?</div>
               <div className="flex flex-row gap-4">
                 <motion.button
