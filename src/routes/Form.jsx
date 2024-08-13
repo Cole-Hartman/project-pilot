@@ -11,6 +11,8 @@ export default function Form() {
   const [selectedTraits, setSelectedTraits] = useState([]);
   const [selectedGoals, setSelectedGoals] = useState([]);
   const [selectedTechStack, setSelectedTechStack] = useState([]);
+  const [selectedPreferences, setSelectedPreferences] = useState([]);
+  const [selectedAreas, setSelectedAreas] = useState([]);
 
 
 
@@ -90,6 +92,41 @@ export default function Form() {
       setPrompt(prompt + "I don't have a specific tech stack in mind. ");
     } else {
       setPrompt(prompt + `I'm interested in using the following technologies: ${selectedTechStack.join(', ')}. `);
+    }
+    nextStep();
+  };
+
+  {/* Handle Language Select */ }
+  const handlePreferenceToggle = (preference) => {
+    setSelectedPreferences(prevPreferences =>
+      prevPreferences.includes(preference)
+        ? prevPreferences.filter(p => p !== preference)
+        : [...prevPreferences, preference]
+    );
+  };
+
+  const handlePreferenceConfirm = () => {
+    if (selectedPreferences.length === 0) {
+      setPrompt(prompt + "I don't have any additional preferences for the project. ");
+    } else {
+      setPrompt(prompt + `I have the following additional preferences for the project: ${selectedPreferences.join(', ')}. `);
+    }
+    nextStep();
+  };
+
+  {/* Handle Area Select */ }
+  const handleAreaToggle = (area) => {
+    setSelectedAreas(prevAreas =>
+      prevAreas.includes(area)
+        ? prevAreas.filter(a => a !== area)
+        : [...prevAreas, area]
+    );
+  };
+  const handleAreaConfirm = () => {
+    if (selectedAreas.length === 0) {
+      setPrompt(prompt + "I'm open to exploring any area of computer science. ");
+    } else {
+      setPrompt(prompt + `I'm particularly interested in the following areas: ${selectedAreas.join(', ')}. `);
     }
     nextStep();
   };
@@ -309,7 +346,8 @@ export default function Form() {
               }}
             >
               <h2 className="text-6xl 2xl:text-8xl font-bold mb-28 text-center">ABOUT YOU</h2>
-            </motion.div > <motion.div key="step4" {...fadeTransition} className='flex flex-col justify-center items-center'>
+            </motion.div >
+            <motion.div key="step4" {...fadeTransition} className='flex flex-col justify-center items-center'>
               <div className="text-2xl 2xl:text-3xl font-bold">How much time can you dedicate towards this project?</div>
               <div className="flex flex-row gap-4">
                 <motion.button
@@ -407,50 +445,52 @@ export default function Form() {
             className='flex flex-col justify-center items-center'
           >
             <h2 className="text-6xl 2xl:text-8xl font-bold mb-28 text-center">ABOUT YOUR PROJECT</h2>
-            <div className="text-2xl 2xl:text-3xl font-bold mb-10">What do you preffer working on?</div>
-            <div className="flex flex-row gap-4">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                className="bg-opacity-50 mt-20 mb-2 text-xl p-5 rounded-xl bg-blue-500 hover:bg-opacity-100 text-center cursor-pointer"
-                onClick={() => {
-                  setPrompt(prompt + "I enjoy working on the frontend. ");
-                  nextStep();
-                }}
-              >
-                Frontend
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                className="bg-opacity-50 mt-20 mb-2 text-xl p-5 rounded-xl bg-blue-500 hover:bg-opacity-100 text-center cursor-pointer"
-                onClick={() => {
-                  setPrompt(prompt + "I enjoy working on the backend. ");
-                  nextStep();
-                }}
-              >
-                Backend
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                className="bg-opacity-50 mt-20 mb-2 text-xl p-5 rounded-xl bg-blue-500 hover:bg-opacity-100 text-center cursor-pointer"
-                onClick={() => {
-                  setPrompt(prompt + "I enjoy working full-stack. ");
-                  nextStep();
-                }}
-              >
-                Full-Stack
-              </motion.button>
+            <motion.div key="step7" {...fadeTransition} className='flex flex-col justify-center items-center'>
+              <div className="text-2xl 2xl:text-3xl font-bold">What do you preffer working on?</div>
+              <div className="flex flex-row gap-4">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  className="bg-opacity-50 mt-20 mb-2 text-xl p-5 rounded-xl bg-blue-500 hover:bg-opacity-100 text-center cursor-pointer"
+                  onClick={() => {
+                    setPrompt(prompt + "I enjoy working on the frontend. ");
+                    nextStep();
+                  }}
+                >
+                  Frontend
+                </motion.button>
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  className="bg-opacity-50 mt-20 mb-2 text-xl p-5 rounded-xl bg-blue-500 hover:bg-opacity-100 text-center cursor-pointer"
+                  onClick={() => {
+                    setPrompt(prompt + "I enjoy working on the backend. ");
+                    nextStep();
+                  }}
+                >
+                  Backend
+                </motion.button>
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  className="bg-opacity-50 mt-20 mb-2 text-xl p-5 rounded-xl bg-blue-500 hover:bg-opacity-100 text-center cursor-pointer"
+                  onClick={() => {
+                    setPrompt(prompt + "I enjoy working full-stack. ");
+                    nextStep();
+                  }}
+                >
+                  Full-Stack
+                </motion.button>
 
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                className="bg-opacity-50 mt-20 mb-2 text-xl p-5 rounded-xl bg-blue-500 hover:bg-opacity-100 text-center cursor-pointer"
-                onClick={() => {
-                  setPrompt(prompt + "I'm not quite sure if I would rather work on frontend, backend, or fullstack for this project. ");
-                  nextStep();
-                }}
-              >
-                Not Sure
-              </motion.button>
-            </div>
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  className="bg-opacity-50 mt-20 mb-2 text-xl p-5 rounded-xl bg-blue-500 hover:bg-opacity-100 text-center cursor-pointer"
+                  onClick={() => {
+                    setPrompt(prompt + "I'm not quite sure if I would rather work on frontend, backend, or fullstack for this project. ");
+                    nextStep();
+                  }}
+                >
+                  Not Sure
+                </motion.button>
+              </div>
+            </motion.div>
           </motion.div>
         );
       case 7:
@@ -539,7 +579,7 @@ export default function Form() {
           <>
             <h2 className="text-6xl 2xl:text-8xl font-bold mb-28 text-center">ABOUT YOUR PROJECT</h2>
             <motion.div key="step9" {...fadeTransition} className='flex flex-col justify-center items-center'>
-              <div className="text-2xl 2xl:text-3xl font-bold mb-10">Do you have a specific tech stack in mind?</div>
+              <div className="text-2xl 2xl:text-3xl font-bold mb-10">Do you preffer using any of the following?</div>
               <div className="flex flex-wrap justify-center gap-4 mb-10">
                 {['React', 'Angular', 'Vue.js', 'Node.js', 'Django', 'Flask', 'Spring Boot', 'Laravel', 'Express.js', 'MongoDB', 'PostgreSQL', 'Docker'].map(tech => (
                   <motion.button
@@ -563,15 +603,76 @@ export default function Form() {
             </motion.div>
           </>
         );
-
-
-
-
-
-
       case 10:
         return (
-          <motion.div key="step10" {...fadeTransition} className='flex flex-col justify-center items-center'>
+          <>
+            <h2 className="text-6xl 2xl:text-8xl font-bold mb-28 text-center">ABOUT YOUR PROJECT</h2>
+            <motion.div key="step10" {...fadeTransition} className='flex flex-col justify-center items-center'>
+              <div className="text-2xl 2xl:text-3xl font-bold mb-10">Any additional preferences for your project?</div>
+              <div className="flex flex-wrap justify-center gap-4 mb-10">
+                {['Open-Source', 'Private', 'Scalable', 'Maintainable', 'Deployable', 'Secure', 'Modular', 'Cloud-Based', 'Versioned', 'Documented'].map(preference => (
+                  <motion.button
+                    key={preference}
+                    whileHover={{ scale: 1.05 }}
+                    className={`bg-opacity-50 mb-2 text-xl p-5 rounded-xl ${selectedPreferences.includes(preference) ? 'bg-green-500' : 'bg-blue-500'
+                      } hover:bg-opacity-100 text-center cursor-pointer`}
+                    onClick={() => handlePreferenceToggle(preference)}
+                  >
+                    {preference}
+                  </motion.button>
+                ))}
+              </div>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                className="bg-opacity-50 mt-10 mb-2 text-xl p-5 rounded-xl bg-yellow-500 hover:bg-opacity-100 text-center cursor-pointer"
+                onClick={handlePreferenceConfirm}
+              >
+                Continue
+              </motion.button>
+            </motion.div>
+          </>
+        );
+      case 11:
+        return (
+          <>
+            <motion.div
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{
+                duration: 1,
+                bounce: 0.3
+              }}
+            >
+              <h2 className="text-6xl 2xl:text-8xl font-bold mb-28 text-center">ABOUT YOUR PROJECT</h2>
+            </motion.div>
+            <motion.div key="step11" {...fadeTransition} className='flex flex-col justify-center items-center'>
+              <div className="text-2xl 2xl:text-3xl font-bold mb-10">Do any of these areas spark interest?</div>
+              <div className="flex flex-wrap justify-center gap-4 mb-10">
+                {['Web Development', 'Mobile Apps', 'AI/Machine Learning', 'Data Science', 'Cybersecurity', 'IoT', 'Cloud Computing', 'DevOps', 'Blockchain', 'AR/VR'].map(area => (
+                  <motion.button
+                    key={area}
+                    whileHover={{ scale: 1.05 }}
+                    className={`bg-opacity-50 mb-2 text-xl p-5 rounded-xl ${selectedAreas.includes(area) ? 'bg-green-500' : 'bg-blue-500'
+                      } hover:bg-opacity-100 text-center cursor-pointer`}
+                    onClick={() => handleAreaToggle(area)}
+                  >
+                    {area}
+                  </motion.button>
+                ))}
+              </div>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                className="bg-opacity-50 mt-10 mb-2 text-xl p-5 rounded-xl bg-yellow-500 hover:bg-opacity-100 text-center cursor-pointer"
+                onClick={handleAreaConfirm}
+              >
+                Continue
+              </motion.button>
+            </motion.div>
+          </>
+        );
+      case 12:
+        return (
+          <motion.div key="step12" {...fadeTransition} className='flex flex-col justify-center items-center'>
             <h2 className="text-4xl font-bold mb-8 text-center">Your Completion</h2>
             <motion.button
               whileHover={{ scale: 1.05 }}
