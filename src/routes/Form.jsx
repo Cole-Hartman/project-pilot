@@ -510,6 +510,42 @@ export default function Form() {
                 exit: { opacity: 0, y: -5 }
               }}
               transition={{ duration: 0.5 }}
+              className="text-5xl md:text-6xl xl:text-7xl mt-20 md:mt-12 font-bold mb-8 md:mb-12 text-center"
+            >
+              ABOUT YOUR <span className="text-blue-500">PROJECT</span>
+            </motion.h2>
+            <motion.button
+              variants={{
+                initial: { opacity: 0, y: 10 },
+                animate: { opacity: 1, y: 0 },
+                exit: { opacity: 0, y: 10 }
+              }}
+              transition={{ duration: 0.5 }}
+              whileHover={{ scale: 1.05 }}
+              className="bg-opacity-50 mt-6 md:mt-10 mb-2 text-lg md:text-xl p-4 md:p-5 rounded-xl bg-yellow-500 hover:bg-opacity-100 text-center cursor-pointer w-full md:w-auto"
+              onClick={() => nextStep()}
+            >
+              Continue
+            </motion.button>
+          </motion.div>
+        );
+      case 8:
+        return (
+          <motion.div
+            key="step8"
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            transition={{ duration: 0.5 }}
+            className='flex flex-col justify-center items-center px-4 md:px-0 h-screen overflow-hidden'
+          >
+            <motion.h2
+              variants={{
+                initial: { opacity: 0, y: 5 },
+                animate: { opacity: 1, y: 0 },
+                exit: { opacity: 0, y: -5 }
+              }}
+              transition={{ duration: 0.5 }}
               className="text-4xl md:text-5xl xl:text-7xl mt-20 md:mt-12 font-bold mb-8 md:mb-12 text-center"
             >
               ABOUT YOUR PROJECT
@@ -563,10 +599,10 @@ export default function Form() {
             </motion.div>
           </motion.div>
         );
-      case 8:
+      case 9:
         return (
           <motion.div
-            key="step8"
+            key="step9"
             initial="initial"
             animate="animate"
             exit="exit"
@@ -619,10 +655,10 @@ export default function Form() {
             </motion.div>
           </motion.div>
         );
-      case 9:
+      case 10:
         return (
           <motion.div
-            key="step9"
+            key="step10"
             initial="initial"
             animate="animate"
             exit="exit"
@@ -675,10 +711,10 @@ export default function Form() {
             </motion.div>
           </motion.div>
         );
-      case 10:
+      case 11:
         return (
           <motion.div
-            key="step10"
+            key="step11"
             initial="initial"
             animate="animate"
             exit="exit"
@@ -731,10 +767,10 @@ export default function Form() {
             </motion.div>
           </motion.div>
         );
-      case 11:
+      case 12:
         return (
           <motion.div
-            key="step11"
+            key="step12"
             initial="initial"
             animate="animate"
             exit="exit"
@@ -787,10 +823,10 @@ export default function Form() {
             </motion.div>
           </motion.div>
         );
-      case 12:
+      case 13:
         return (
           <motion.div
-            key="step12"
+            key="step13"
             initial="initial"
             animate="animate"
             exit="exit"
@@ -843,10 +879,10 @@ export default function Form() {
             </motion.div>
           </motion.div>
         );
-      case 13:
+      case 14:
         return (
           <motion.div
-            key="step13"
+            key="step14"
             {...fadeTransition}
             className='flex flex-col justify-center items-center px-4 md:px-0'
           >
@@ -869,9 +905,9 @@ export default function Form() {
             </motion.button>
           </motion.div>
         );
-      case 14:
+      case 15:
         return (
-          <motion.div key="step14" {...fadeTransition} className='flex flex-col justify-center items-center'>
+          <motion.div key="step15" {...fadeTransition} className='flex flex-col justify-center items-center'>
             <h2 className="text-4xl font-bold mb-8 text-center">LETS FIND A PROJECT FOR YOU</h2>
             {/* Add your form fields here */}
             <motion.button
