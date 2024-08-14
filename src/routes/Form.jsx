@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '../components/navbar.jsx';
 import AuthWrapper from '../components/AuthWrapper.jsx'
@@ -13,8 +14,6 @@ export default function Form() {
   const [selectedTechStack, setSelectedTechStack] = useState([]);
   const [selectedPreferences, setSelectedPreferences] = useState([]);
   const [selectedAreas, setSelectedAreas] = useState([]);
-
-
 
   {/*Transition Presets*/ }
   const fadeTransition = {
@@ -135,6 +134,8 @@ export default function Form() {
     console.log(prompt)
   }, [prompt])
 
+
+  const navigate = useNavigate();
 
   const nextStep = () => setStep(prevStep => prevStep + 1);
 
@@ -518,7 +519,7 @@ export default function Form() {
               variants={{
                 initial: { opacity: 0, y: 10 },
                 animate: { opacity: 1, y: 0 },
-                exit: { opacity: 0, y: 10 }
+                exit: { opacity: 0, y: -10 }
               }}
               transition={{ duration: 0.5 }}
               whileHover={{ scale: 1.05 }}
@@ -887,45 +888,33 @@ export default function Form() {
             className='flex flex-col justify-center items-center px-4 md:px-0'
           >
             <h2 className="text-5xl md:text-6xl 2xl:text-8xl mt-16 md:mt-0 font-bold mb-20 md:mb-28 text-center">
-              Your Completion
+              Next Step
             </h2>
             <p className="text-lg md:text-2xl mb-8 text-center w-full md:w-3/4">
-              Great job! You've completed all the questions. Ready to generate your project idea?
+              Great job! You've completed all the questions. Ready to generate your projects?
             </p>
             <motion.button
               whileHover={{ scale: 1.05 }}
               className="mt-4 bg-blue-500 text-white px-6 py-3 rounded-lg text-lg md:text-xl w-full md:w-auto"
               onClick={() => {
                 console.log("Final prompt:", prompt);
-                // Add your submission logic here
-                nextStep();
+                nextStep()
+                setTimeout(() => {
+                  navigate('/projects');
+                }, 900);
               }}
-            >
-              Generate My Project Idea
-            </motion.button>
-          </motion.div>
-        );
-      case 15:
-        return (
-          <motion.div key="step15" {...fadeTransition} className='flex flex-col justify-center items-center'>
-            <h2 className="text-4xl font-bold mb-8 text-center">LETS FIND A PROJECT FOR YOU</h2>
-            {/* Add your form fields here */}
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              className="mt-4 bg-blue-500 text-white px-6 py-3 rounded-lg"
-              onClick={nextStep}
             >
               Submit
             </motion.button>
           </motion.div>
         );
-      default:
-        return (
-          <motion.div key="stepFinal" {...fadeTransition} className='flex flex-col justify-center items-center'>
-            <h2 className="text-4xl font-bold mb-8 text-center">Thank You!</h2>
-            <p>Your form has been submitted successfully.</p>
-          </motion.div>
-        );
+      //default:
+      //  return (
+      //    <motion.div key="stepFinal" {...fadeTransition} className='flex flex-col justify-center items-center'>
+      //      <h2 className="text-4xl font-bold mb-8 text-center">Thank You!</h2>
+      //      <p>Your form has been submitted successfully.</p>
+      //    </motion.div>
+      //  );
     }
   };
 

@@ -12,6 +12,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import App from './App.jsx'
 import Form from './routes/Form.jsx'
 import Profile from './routes/Profile.jsx'
+import Projects from './routes/Projects.jsx'
 
 
 const router = createBrowserRouter([
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
   {
     path: "/profile",
     element: <Profile />
+  },
+  {
+    path: "/projects",
+    element: <Projects />
   }
 
 ])
