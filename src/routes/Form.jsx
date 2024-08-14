@@ -799,12 +799,10 @@ export default function Form() {
             </motion.button>
           </motion.div>
         );
-
-
-      case 4:
+      case 13:
         return (
-          <motion.div key="step4" {...fadeTransition} className='flex flex-col justify-center items-center'>
-            <h2 className="text-4xl font-bold mb-8 text-center">Additional Information</h2>
+          <motion.div key="step13" {...fadeTransition} className='flex flex-col justify-center items-center'>
+            <h2 className="text-4xl font-bold mb-8 text-center">LETS FIND A PROJECT FOR YOU</h2>
             {/* Add your form fields here */}
             <motion.button
               whileHover={{ scale: 1.05 }}
