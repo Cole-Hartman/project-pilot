@@ -179,7 +179,7 @@ export default function Form() {
                 exit: { opacity: 0, y: -5 }
               }}
               transition={{ duration: 0.5 }}
-              className="text-6xl 2xl:text-8xl mt-10 md:mt-0 font-bold mb-28 text-center"
+              className="text-6xl 2xl:text-8xl mt-10 md:mt-0 font-bold mb-20 md:mb-28 text-center"
             >
               ABOUT YOU
             </motion.h2>
@@ -233,7 +233,7 @@ export default function Form() {
                 exit: { opacity: 0, y: -5 }
               }}
               transition={{ duration: 0.5 }}
-              className="text-6xl 2xl:text-8xl mt-16 md:mt-0 font-bold mb-28 text-center"
+              className="text-6xl 2xl:text-8xl mt-16 md:mt-0 font-bold mb-20 md:mb-28 text-center"
             >
               ABOUT YOU
             </motion.h2>
@@ -253,7 +253,7 @@ export default function Form() {
                   { text: "1st Year", prompt: "I am a first year college student studying computer science. " },
                   { text: "2nd Year", prompt: "I am a 2nd year college student studying computer science. " },
                   { text: "3rd Year", prompt: "I am a 3rd year college student studying computer science. " },
-                  { text: "4th + Year", prompt: "I am a 4th year or above college student studying computer science. " }
+                  { text: "4th+ Year", prompt: "I am a 4th year or above college student studying computer science. " }
                 ].map(({ text, prompt: buttonPrompt }) => (
                   <motion.button
                     key={text}
@@ -395,10 +395,66 @@ export default function Form() {
               variants={{
                 initial: { opacity: 0, y: 5 },
                 animate: { opacity: 1, y: 0 },
-                exit: { opacity: 0, y: 20 }
+                exit: { opacity: 0, y: -5 }
               }}
               transition={{ duration: 0.5 }}
               className="text-5xl md:text-6xl 2xl:text-8xl mt-16 md:mt-0 font-bold mb-20 md:mb-28 text-center"
+            >
+              ABOUT YOU
+            </motion.h2>
+            <motion.div
+              variants={{
+                initial: { opacity: 0, y: 20 },
+                animate: { opacity: 1, y: 0 },
+                exit: { opacity: 0, y: 20 }
+              }}
+              transition={{ duration: 0.5 }}
+              className='flex flex-col justify-center items-center w-full'
+            >
+              <div className="text-xl md:text-2xl 2xl:text-3xl font-bold mb-10 text-center">
+                What do you prefer working on?
+              </div>
+              <div className="flex flex-col md:flex-row gap-4 w-full md:w-auto justify-center items-center">
+                {[
+                  { text: "Frontend", prompt: "I enjoy working on the frontend. " },
+                  { text: "Backend", prompt: "I enjoy working on the backend. " },
+                  { text: "Full-Stack", prompt: "I enjoy working full-stack. " },
+                  { text: "Not Sure", prompt: "I'm not quite sure if I would rather work on frontend, backend, or fullstack for this project. " }
+                ].map(({ text, prompt: buttonPrompt }) => (
+                  <motion.button
+                    key={text}
+                    whileHover={{ scale: 1.05 }}
+                    className="bg-opacity-50 mb-2 text-lg md:text-xl p-3 md:p-5 rounded-xl bg-blue-500 hover:bg-opacity-100 text-center cursor-pointer w-full md:w-auto"
+                    onClick={() => {
+                      setPrompt(prompt + buttonPrompt);
+                      nextStep();
+                    }}
+                  >
+                    {text}
+                  </motion.button>
+                ))}
+              </div>
+            </motion.div>
+          </motion.div>
+        );
+      case 6:
+        return (
+          <motion.div
+            key="step6"
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            transition={{ duration: 0.5 }}
+            className='flex flex-col justify-center items-center px-4 md:px-0'
+          >
+            <motion.h2
+              variants={{
+                initial: { opacity: 0, y: 5 },
+                animate: { opacity: 1, y: 0 },
+                exit: { opacity: 0, y: 20 }
+              }}
+              transition={{ duration: 0.5 }}
+              className="text-5xl md:text-6xl 2xl:text-8xl mt-24 md:mt-0 font-bold mb-20 md:mb-28 text-center"
             >
               ABOUT YOU
             </motion.h2>
@@ -437,15 +493,15 @@ export default function Form() {
             </motion.div>
           </motion.div>
         );
-      case 6:
+      case 7:
         return (
           <motion.div
-            key="step6"
+            key="step7"
             initial="initial"
             animate="animate"
             exit="exit"
             transition={{ duration: 0.5 }}
-            className='flex flex-col justify-center items-center px-4 md:px-0'
+            className='flex flex-col justify-center items-center px-4 md:px-0 h-screen overflow-hidden'
           >
             <motion.h2
               variants={{
@@ -454,7 +510,7 @@ export default function Form() {
                 exit: { opacity: 0, y: -5 }
               }}
               transition={{ duration: 0.5 }}
-              className="text-5xl md:text-6xl 2xl:text-8xl mt-16 md:mt-0 font-bold mb-20 md:mb-28 text-center"
+              className="text-4xl md:text-5xl xl:text-7xl mt-20 md:mt-12 font-bold mb-8 md:mb-12 text-center"
             >
               ABOUT YOUR PROJECT
             </motion.h2>
@@ -465,22 +521,36 @@ export default function Form() {
                 exit: { opacity: 0, y: 20 }
               }}
               transition={{ duration: 0.5 }}
-              className='flex flex-col justify-center items-center w-full'
+              className='flex flex-col justify-start items-center w-full overflow-hidden'
             >
-              <div className="text-xl md:text-2xl 2xl:text-3xl font-bold mb-10 text-center">
-                What do you prefer working on?
+              <div className="text-xl md:text-2xl 2xl:text-4xl font-bold mb-6 lg:mt-20 text-center">
+                Do you have a target audience?
               </div>
-              <div className="flex flex-col md:flex-row gap-4 w-full md:w-auto justify-center items-center">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 w-full h-5/6 max-w-6xl overflow-y-auto lg:overflow-y-hidden pb-8 px-4">
                 {[
-                  { text: "Frontend", prompt: "I enjoy working on the frontend. " },
-                  { text: "Backend", prompt: "I enjoy working on the backend. " },
-                  { text: "Full-Stack", prompt: "I enjoy working full-stack. " },
-                  { text: "Not Sure", prompt: "I'm not quite sure if I would rather work on frontend, backend, or fullstack for this project. " }
+                  { text: "Students", prompt: "My target audience is students. " },
+                  { text: "Businesses", prompt: "My target audience is businesses. " },
+                  { text: "Developers", prompt: "My target audience is developers. " },
+                  { text: "General Public", prompt: "My target audience is the general public. " },
+                  { text: "Educators", prompt: "My target audience is educators. " },
+                  { text: "Researchers", prompt: "My target audience is researchers. " },
+                  { text: "Children", prompt: "My target audience is children. " },
+                  { text: "Seniors", prompt: "My target audience is seniors. " },
+                  { text: "Small Businesses", prompt: "My target audience is small businesses. " },
+                  { text: "Startups", prompt: "My target audience is startups. " },
+                  { text: "Non-Profits", prompt: "My target audience is non-profits. " },
+                  { text: "City Residents", prompt: "My target audience is city residents. " },
+                  { text: "Healthcare Professionals", prompt: "My target audience is healthcare professionals. " },
+                  { text: "Environmental Organizations", prompt: "My target audience is environmental organizations. " },
+                  { text: "Gamers", prompt: "My target audience is gamers. " },
+                  { text: "Artists", prompt: "My target audience is artists. " },
+                  { text: "Entrepreneurs", prompt: "My target audience is entrepreneurs. " },
+                  { text: "Other", prompt: "Target audience: Other. " }
                 ].map(({ text, prompt: buttonPrompt }) => (
                   <motion.button
                     key={text}
                     whileHover={{ scale: 1.05 }}
-                    className="bg-opacity-50 mb-2 text-lg md:text-xl p-3 md:p-5 rounded-xl bg-blue-500 hover:bg-opacity-100 text-center cursor-pointer w-full md:w-auto"
+                    className="bg-blue-500 bg-opacity-50 hover:bg-opacity-100 text-white font-semibold py-2 md:py-3 px-4 xl:w-40 lg:h-20 rounded-xl text-sm md:text-base xl:text-xl"
                     onClick={() => {
                       setPrompt(prompt + buttonPrompt);
                       nextStep();
@@ -493,10 +563,10 @@ export default function Form() {
             </motion.div>
           </motion.div>
         );
-      case 7:
+      case 8:
         return (
           <motion.div
-            key="step7"
+            key="step8"
             initial="initial"
             animate="animate"
             exit="exit"
@@ -549,10 +619,10 @@ export default function Form() {
             </motion.div>
           </motion.div>
         );
-      case 8:
+      case 9:
         return (
           <motion.div
-            key="step8"
+            key="step9"
             initial="initial"
             animate="animate"
             exit="exit"
@@ -605,10 +675,10 @@ export default function Form() {
             </motion.div>
           </motion.div>
         );
-      case 9:
+      case 10:
         return (
           <motion.div
-            key="step9"
+            key="step10"
             initial="initial"
             animate="animate"
             exit="exit"
@@ -661,10 +731,10 @@ export default function Form() {
             </motion.div>
           </motion.div>
         );
-      case 10:
+      case 11:
         return (
           <motion.div
-            key="step10"
+            key="step11"
             initial="initial"
             animate="animate"
             exit="exit"
@@ -717,10 +787,10 @@ export default function Form() {
             </motion.div>
           </motion.div>
         );
-      case 11:
+      case 12:
         return (
           <motion.div
-            key="step11"
+            key="step12"
             initial="initial"
             animate="animate"
             exit="exit"
@@ -773,10 +843,10 @@ export default function Form() {
             </motion.div>
           </motion.div>
         );
-      case 12:
+      case 13:
         return (
           <motion.div
-            key="step12"
+            key="step13"
             {...fadeTransition}
             className='flex flex-col justify-center items-center px-4 md:px-0'
           >
@@ -799,9 +869,9 @@ export default function Form() {
             </motion.button>
           </motion.div>
         );
-      case 13:
+      case 14:
         return (
-          <motion.div key="step13" {...fadeTransition} className='flex flex-col justify-center items-center'>
+          <motion.div key="step14" {...fadeTransition} className='flex flex-col justify-center items-center'>
             <h2 className="text-4xl font-bold mb-8 text-center">LETS FIND A PROJECT FOR YOU</h2>
             {/* Add your form fields here */}
             <motion.button

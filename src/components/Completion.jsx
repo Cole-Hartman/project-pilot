@@ -22,6 +22,7 @@ export default function Completion({ prompt }) {
     fetchCompletion();
   }, [prompt]);
 
+
   return (
     <>
       {completion && <div className='mx-5 my-5'>{completion.message.content}</div>}
