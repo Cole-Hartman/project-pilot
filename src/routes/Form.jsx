@@ -176,10 +176,10 @@ export default function Form() {
               variants={{
                 initial: { opacity: 0, y: -20 },
                 animate: { opacity: 1, y: 0 },
-                exit: { opacity: 1, y: 0 }
+                exit: { opacity: 0, y: -5 }
               }}
               transition={{ duration: 0.5 }}
-              className="text-6xl 2xl:text-8xl font-bold mb-28 text-center"
+              className="text-6xl 2xl:text-8xl mt-10 md:mt-0 font-bold mb-28 text-center"
             >
               ABOUT YOU
             </motion.h2>
@@ -193,8 +193,8 @@ export default function Form() {
               transition={{ duration: 0.5 }}
               className='flex flex-col justify-center items-center'
             >
-              <div className="text-2xl 2xl:text-3xl font-bold">How many years of coding experience do you have?</div>
-              <div className="flex flex-row gap-4 mt-20">
+              <div className="text-2xl w-3/4 text-center 2xl:text-3xl font-bold">How many years of coding experience do you have?</div>
+              <div className="flex md:flex-row flex-col gap-4 mt-10 md:mt-20 w-full justify-center items-center">
                 {[
                   { text: "No Coding Experience", years: "no" },
                   { text: "0-1 Years", years: "0-1 years of" },
@@ -204,7 +204,7 @@ export default function Form() {
                   <motion.button
                     key={text}
                     whileHover={{ scale: 1.05 }}
-                    className="bg-opacity-50 mb-2 text-xl p-5 rounded-xl bg-blue-500 hover:bg-opacity-100 text-center cursor-pointer"
+                    className="bg-opacity-50 mb-2 text-lg md:text-xl p-2 md:p-5 rounded-xl bg-blue-500 hover:bg-opacity-100 text-center cursor-pointer h-30 w-3/4 md:w-auto"
                     onClick={() => {
                       setPrompt(prompt + `I have ${years} coding experience. `);
                       nextStep();
@@ -219,14 +219,35 @@ export default function Form() {
         );
       case 2:
         return (
-          <motion.div key="step2" className='flex flex-col justify-center items-center'>
-            <h2 className="text-6xl 2xl:text-8xl font-bold mb-28 text-center">ABOUT YOU</h2>
+          <motion.div
+            key="step2"
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            transition={{ duration: 0.5 }}
+          >
+            <motion.h2
+              variants={{
+                initial: { opacity: 0, y: 5 },
+                animate: { opacity: 1, y: 0 },
+                exit: { opacity: 0, y: -5 }
+              }}
+              transition={{ duration: 0.5 }}
+              className="text-6xl 2xl:text-8xl mt-16 md:mt-0 font-bold mb-28 text-center"
+            >
+              ABOUT YOU
+            </motion.h2>
             <motion.div
-              {...fadeTransition}
+              variants={{
+                initial: { opacity: 0, y: 20 },
+                animate: { opacity: 1, y: 0 },
+                exit: { opacity: 0, y: 20 }
+              }}
+              transition={{ duration: 0.5 }}
               className='flex flex-col justify-center items-center'
             >
-              <div className="text-2xl 2xl:text-3xl font-bold">What year of college are you in?</div>
-              <div className="flex flex-wrap justify-center gap-4 mt-20">
+              <div className="text-2xl w-3/4 text-center 2xl:text-3xl font-bold">What year of college are you in?</div>
+              <div className="flex md:flex-row flex-col gap-4 mt-10 md:mt-20 w-full justify-center items-center">
                 {[
                   { text: "Not a College Student", prompt: "I am not studying computer science as a college student. " },
                   { text: "1st Year", prompt: "I am a first year college student studying computer science. " },
@@ -237,7 +258,7 @@ export default function Form() {
                   <motion.button
                     key={text}
                     whileHover={{ scale: 1.05 }}
-                    className="bg-opacity-50 mb-2 text-xl p-5 rounded-xl bg-blue-500 hover:bg-opacity-100 text-center cursor-pointer"
+                    className="bg-opacity-50 mb-2 text-lg md:text-xl p-2 md:p-5 rounded-xl bg-blue-500 hover:bg-opacity-100 text-center cursor-pointer h-30 w-3/4 md:w-auto"
                     onClick={() => {
                       setPrompt(prompt + buttonPrompt);
                       nextStep();
@@ -252,21 +273,42 @@ export default function Form() {
         );
       case 3:
         return (
-          <motion.div key="step3" className='flex flex-col justify-center items-center'>
-            <h2 className="text-6xl 2xl:text-8xl font-bold mb-28 text-center">ABOUT YOU</h2>
+          <motion.div
+            key="step3"
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            transition={{ duration: 0.5 }}
+          >
+            <motion.h2
+              variants={{
+                initial: { opacity: 0, y: 5 },
+                animate: { opacity: 1, y: 0 },
+                exit: { opacity: 0, y: -5 }
+              }}
+              transition={{ duration: 0.5 }}
+              className="text-6xl 2xl:text-8xl mt-20 md:mt-0 font-bold mb-20 md:mb-28 text-center"
+            >
+              ABOUT YOU
+            </motion.h2>
             <motion.div
-              {...fadeTransition}
+              variants={{
+                initial: { opacity: 0, y: 20 },
+                animate: { opacity: 1, y: 0 },
+                exit: { opacity: 0, y: 20 }
+              }}
+              transition={{ duration: 0.5 }}
               className='flex flex-col justify-center items-center'
             >
-              <div className="text-2xl 2xl:text-3xl font-bold mb-10">
+              <div className="text-2xl w-full md:w-3/4 text-center 2xl:text-3xl font-bold mb-10">
                 What programming languages are you comfortable with? None is ok!
               </div>
-              <div className="flex flex-wrap justify-center gap-4 mb-10">
+              <div className="flex flex-wrap justify-center gap-4 md:mb-10 w-full px-4 md:px-0">
                 {['Python', 'JavaScript', 'Java', 'C', 'C++', 'C#', 'Ruby', 'Go', 'Swift', 'Kotlin', 'Rust'].map(language => (
                   <motion.button
                     key={language}
                     whileHover={{ scale: 1.05 }}
-                    className={`bg-opacity-50 mb-2 text-xl p-5 rounded-xl ${selectedLanguages.includes(language) ? 'bg-green-500' : 'bg-blue-500'
+                    className={`bg-opacity-50 mb-2 text-lg md:text-xl p-2 md:p-5 rounded-xl ${selectedLanguages.includes(language) ? 'bg-green-500' : 'bg-blue-500'
                       } hover:bg-opacity-100 text-center cursor-pointer`}
                     onClick={() => handleLanguageToggle(language)}
                   >
@@ -286,10 +328,31 @@ export default function Form() {
         );
       case 4:
         return (
-          <motion.div key="step4" className='flex flex-col justify-center items-center'>
-            <h2 className="text-6xl 2xl:text-8xl font-bold mb-28 text-center">ABOUT YOU</h2>
+          <motion.div
+            key="step4"
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            transition={{ duration: 0.5 }}
+            className='flex flex-col justify-center items-center'>
+            <motion.h2
+              variants={{
+                initial: { opacity: 0, y: 5 },
+                animate: { opacity: 1, y: 0 },
+                exit: { opacity: 0, y: -5 }
+              }}
+              transition={{ duration: 0.5 }}
+              className="text-6xl 2xl:text-8xl mt-20 md:mt-0 font-bold mb-20 md:mb-28 text-center"
+            >
+              ABOUT YOU
+            </motion.h2>
             <motion.div
-              {...fadeTransition}
+              variants={{
+                initial: { opacity: 0, y: 20 },
+                animate: { opacity: 1, y: 0 },
+                exit: { opacity: 0, y: 20 }
+              }}
+              transition={{ duration: 0.5 }}
               className='flex flex-col justify-center items-center'
             >
               <div className="text-2xl 2xl:text-3xl font-bold">
@@ -318,6 +381,12 @@ export default function Form() {
             </motion.div>
           </motion.div>
         );
+
+
+
+
+
+
       case 5:
         return (
           <motion.div
@@ -670,7 +739,7 @@ export default function Form() {
         >
           <Navbar />
         </motion.div>
-        <div className='h-full flex items-center justify-center pb-52'>
+        <div className='h-full flex items-center justify-center pb-52 mt-5'>
           <div className="mx-3 my-2 flex flex-col justify-center items-center">
             <AnimatePresence mode="wait">
               {renderStep()}
