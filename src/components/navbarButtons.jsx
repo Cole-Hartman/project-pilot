@@ -1,20 +1,30 @@
 import React, { useState, useEffect } from 'react';
+import TerminalIcon from '@mui/icons-material/Terminal';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../config/supabaseClient.js';
 
 export default function NavbarButtons() {
   const [session, setSession] = useState(null);
+  const [profilePicUrl, setProfilePicUrl] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
+      if (session?.user?.user_metadata?.avatar_url) {
+        setProfilePicUrl(session.user.user_metadata.avatar_url);
+      }
     });
 
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
+      if (session?.user?.user_metadata?.avatar_url) {
+        setProfilePicUrl(session.user.user_metadata.avatar_url);
+      } else {
+        setProfilePicUrl(null);
+      }
     });
 
     return () => subscription.unsubscribe();
@@ -28,21 +38,34 @@ export default function NavbarButtons() {
 
   if (!session) {
     return (
-      <button onClick={() => navigate('/form')} className="pr-3 text-lg">
-        Log In
-      </button>
+      <>
+        <div className='text-md flex items-center justify-center lg:gap-3'>
+          <button onClick={() => navigate('/form')} className="pr-3 text-lg">
+            Log In
+          </button>
+          <div className='' size="large">
+            <TerminalIcon onClick={() => navigate('/')} style={{ color: '#3B82F6' }} fontSize={'large'} />
+          </div>
+        </div>
+      </>
     );
   }
 
   return (
-    <div className='text-lg pr-3'>
-      <button
-        onClick={() => navigate('/profile')}
-        className="pr-3"
-      >
-        Profile
+    <div className='text-md flex items-center justify-center lg:gap-3'>
+      <button onClick={() => navigate('/projects')} className="pr-2">
+        Projects
       </button>
-      <button onClick={handleSignOut}>Sign Out</button>
+      <button onClick={handleSignOut} className="pr-1">Sign Out</button>
+      {profilePicUrl && (
+        <button onClick={() => navigate('/profile')}>
+          <img
+            src={profilePicUrl}
+            alt="Profile"
+            className="w-10 h-10 rounded-full ml-2 my-1 object-cover"
+          />
+        </button>
+      )}
     </div>
   );
 }
