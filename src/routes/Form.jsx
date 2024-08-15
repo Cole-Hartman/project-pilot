@@ -164,8 +164,7 @@ export default function Form() {
   useEffect(() => {
     if (isSubmitting) {
       const submitForm = async () => {
-        const newPrompt = prompt + "Please provide 10 project ideas in raw text format based off the previous prompt from the user. For each project, include the following: 1. A title for the project. 2. A short description (1-2 sentences) summarizing the project's purpose and key features. 3. A long description (3-4 sentences) detailing the project's scope, potential challenges, and implementation ideas. Ensure each project idea aligns roughly with the specified interests, technologies, and preferences of the user. Feel free to exclude projects that do not fit these criteria but it is not necessary. Avoid providing any additional details such as implementation steps or code snippets. Maintain a consistent format for each project idea. Do not use any markdown formatting. Return only the project titles, short descriptions, and long descriptions as specified.";
-
+        const newPrompt = prompt + "INSTRUCTION: Please provide 10 project ideas in the following specific format: Title: [Project Title] Short Description: [A brief one-sentence description of the project] Long Description:[A more detailed 3-4 sentence description of the project, including its purpose, key features, and potential challenges] Title: [Project Title] Short Description: [A brief one-sentence description of the project] Long Description: [A more detailed 3-4 sentence description of the project, including its purpose, key features, and potential challenges] [Continue for all 10 projects] Please ensure that each project follows this exact format, with Title:, Short Description:, and Long Description: labels for each project. Do not include any additional text or formatting outside of this structure. Ensure each project idea aligns roughly with the specified interests, technologies, and preferences of the user. Avoid providing any additional details such as implementation steps or code snippets. Maintain a consistent format for each project idea. Do not use any markdown formatting. Return the projects only in the format specified.";
         const completionResult = await Completion(newPrompt);
         if (completionResult) {
           //console.log("COMPLETION RESULT:", completionResult);
@@ -182,24 +181,38 @@ export default function Form() {
 
   // Parse completion result
   const parseCompletion = (completionText) => {
-    const projects = completionText.split(/\d+\.\s+Title:/).slice(1); // Split by project number and remove empty first element
-    return projects.map(project => {
-      const [title, rest] = project.split('Short Description:');
-      const [shortDescription, longDescription] = rest.split('Long Description:');
-      return {
+    const projects = [];
+    const projectRegex = /Title:\s*(.*?)\s*Short Description:\s*(.*?)\s*Long Description:\s*([\s\S]*?)(?=\n\s*Title:|$)/g;
+    let match;
+
+    while ((match = projectRegex.exec(completionText)) !== null) {
+      const [, title, shortDescription, longDescription] = match;
+
+      projects.push({
         title: title.trim(),
         short_description: shortDescription.trim(),
         long_description: longDescription.trim()
-      };
-    });
+      });
+    }
+
+    return projects;
   };
 
   // Handle Supabase insertion
   useEffect(() => {
     const insertProjects = async () => {
       if (completion) {
+        console.log("Raw completion text:", completion);
         const parsedProjects = parseCompletion(completion);
+        console.log(`Parsed ${parsedProjects.length} projects:`, parsedProjects);
+
+        if (parsedProjects.length === 0) {
+          console.error("No projects were parsed. Check the completion format.");
+          return;
+        }
+
         for (const project of parsedProjects) {
+          console.log(`Inserting project:`, project);
           try {
             const { data, error } = await supabase
               .from('projects')
@@ -218,14 +231,15 @@ export default function Form() {
             console.error('Error inserting project:', error);
           }
         }
-        console.log('All projects inserted');
+        console.log('Insertion Complete');
         navigate('/projects');
+      } else {
+        console.error("Completion is null or undefined");
       }
     };
 
     insertProjects();
   }, [completion, navigate]);
-
   const renderStep = () => {
     switch (step) {
       case 0:
