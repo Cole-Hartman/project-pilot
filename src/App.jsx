@@ -114,17 +114,17 @@ function App() {
             <div className="inline 2xl:block text-5xl 2xl:text-7xl font-bold text-blue-500">YOU</div>
           </div>
 
-          <div className="mt-2 mx-2 text-center 2xl:text-2xl md:w-3/4">Project Pilot is a tool build around refined and structured prompt engineering that allows you to easily communicate your ideas and needs for optimal AI comprehension to only generate tailored and industry standard computer science project ideas for you.</div>
-          <div className="mt-2 mx-2 text-center 2xl:text-2xl mb-5 md:w-1/2">Designed for students, hobbyists, and professionals alike, our app transforms the way you brainstorm and plan your next big project.</div>
+          <div className="mt-2 mx-2 text-center 2xl:text-xl md:w-3/4">Project Pilot is a tool build around refined and structured prompt engineering that allows you to easily communicate your ideas and needs for optimal AI comprehension to only generate tailored and industry standard computer science project ideas for you.</div>
+          <div className="mt-2 mx-2 text-center 2xl:text-xl mb-5 md:w-1/2">Designed for students, hobbyists, and professionals alike, our app transforms the way you brainstorm and plan your next big project.</div>
 
           <div className="flex flex-col justify-center items-center mt-10 text-center xl:flex-row xl:mx-10">
-            <div className="ml-5 mr-4 md:w-1/2 lg:w-2/5 lg:mb-10 xl:w-2/6 2xl:w-1/4">
+            <div className="ml-5 mr-4 md:w-1/2 lg:w-2/5 mb-10 xl:w-2/6 2xl:w-1/4">
               <img src={MobileTree} alt="" />
             </div>
 
             <div className="md:w-4/5 2xl:w-3/5">
               <motion.div
-                className="2xl:flex justify-center 2xl:h-60"
+                className="2xl:flex justify-center 2xl:h-50"
                 initial={{ opacity: 0, x: 50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ amount: 0.4 }} // Trigger animation once when 20% of the element is visible
@@ -136,7 +136,7 @@ function App() {
                   bounce: 0.2
                 }}
               >
-                <Paper className="mx-2 mt-8 px-3 py-3 xl:my-5 2xl:text-2xl 2xl:w-3/4">
+                <Paper className="mx-3 px-3 py-2 pb-5 xl:my-5 2xl:text-lg 2xl:w-3/4">
                   <ul className="text-left mt-2">
                     <li className="font-bold">Effortless Idea Generation:</li>
                     <li className="pl-3">Skip the hassle of sluggishly prompting AI to generate a project for you while typing out every detail about your skill level and your project needs. With just a few clicks, you can generate highly specific and relevant project ideas with maximum efficiency and accuracy.</li>
@@ -145,8 +145,8 @@ function App() {
               </motion.div>
 
               <motion.div
-                className="2xl:flex justify-center 2xl:h-60"
-                initial={{ opacity: 0, x: [-50] }}
+                className="2xl:flex justify-center 2xl:h-50"
+                initial={{ opacity: 0, x: -50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ amount: 0.4 }} // Trigger animation once when 20% of the element is visible
                 transition={{
@@ -157,7 +157,7 @@ function App() {
                   bounce: 0.2
                 }}
               >
-                <Paper className="mx-2 mt-3 px-3 py-3 xl:my-5 2xl:text-2xl 2xl:w-3/4">
+                <Paper className="mx-3 mt-3 px-3 pb-5 pt-1 xl:my-5 2xl:text-lg 2xl:w-3/4">
                   <ul className="text-left mt-2">
                     <li className="font-bold">Save Time and Effort:</li>
                     <li className="pl-3">Focus on bringing your ideas to life rather than struggling with brainstorming. Our app takes care of the ideation process so you can spend more time on what matters most—building and creating.</li>
@@ -166,7 +166,7 @@ function App() {
               </motion.div>
 
               <motion.div
-                className="2xl:flex justify-center 2xl:h-60"
+                className="2xl:flex justify-center 2xl:h-50"
                 initial={{ opacity: 0, x: 50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ amount: 0.4 }} // Trigger animation once when 20% of the element is visible
@@ -178,7 +178,7 @@ function App() {
                   bounce: 0.2
                 }}
               >
-                <Paper className="mx-2 mt-3 px-3 py-3 xl:mt-5 2xl:text-2xl 2xl:w-3/4">
+                <Paper className="mx-3 mt-3 px-3 py-1 pb-3 xl:mt-5 2xl:text-lg 2xl:w-3/4">
                   <ul className="text-left mt-2">
                     <li className="font-bold">Industry-Relevant Insights:</li>
                     <li className="pl-3">Stay ahead of the curve with project ideas that incorporate current tech job market trends and industry standards. We use up-to-date data to ensure your projects are not only innovative but also aligned with what’s relevant and sought after in the tech world.</li>
@@ -189,7 +189,7 @@ function App() {
           </div>
 
           {/*Land Jobs Section*/}
-          <div className="text-5xl 2xl:text-7xl font-bold mt-14 lg:mt-32 md:mt-20 2xl:mb-20">LAND JOBS</div>
+          <div className="text-5xl 2xl:text-7xl font-bold mt-28 lg:mt-32 md:mt-20 2xl:mb-20">LAND JOBS</div>
 
           <div className="w-full mx-auto px-4 md:w-3/4 lg:w-2/4">
             <motion.div
@@ -211,7 +211,7 @@ function App() {
             </motion.div>
           </div>
 
-          <div className="mx-3 mb-5 md:w-4/5 2xl:text-2xl 2xl:w-3/5">According to Code.org, students who work on personal coding projects or internships are 50% more likely to land a job in the tech industry shortly after graduation compared to those who only complete their formal coursework.</div>
+          <div className="mx-3 mb-5 md:w-4/5 2xl:text-xl 2xl:w-3/5">According to Code.org, students who work on personal coding projects or internships are 50% more likely to land a job in the tech industry shortly after graduation compared to those who only complete their formal coursework.</div>
 
           <motion.div
             className="2xl:mt-7"
@@ -226,11 +226,11 @@ function App() {
           </motion.div>
 
           {/*---- QandA Section ----*/}
-          <div className="mx-3 text-5xl 2xl:text-7xl font-bold lg:mt-28">
+          <div className="mx-3 text-5xl 2xl:text-7xl font-bold mt-10 lg:mt-28">
             <div className="mb-5">Q&A</div>
           </div>
 
-          <div className="mx-2 md:w-4/5 2xl:text-2xl mb-16">
+          <div className="mx-2 md:w-4/5 2xl:text-xl mb-28">
             <Accordion>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
@@ -274,7 +274,7 @@ function App() {
           </div>
 
           {/*Quotes Section*/}
-          <div className="mt-18 lg:mt-10 lg:mb-10 grid grid-cols-1 w-4/5 md:grid md:grid-cols-3 2xl:text-2xl">
+          <div className="mt-18 mt-16 mb-10 grid grid-cols-1 w-4/5 md:grid md:grid-cols-3 2xl:text-xl">
             <motion.div
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
@@ -282,7 +282,7 @@ function App() {
             >
               <Paper elevation={3} className="my-2 mx-2 w-auto px-2 py-1 text-left">
                 I was able to find a project that was within my skill level but also pushed my boundaries.
-                <div className="mt-2 text-blue-500 text-opacity-90 text-sm 2xl:text-lg">Cole Hartman <br /> Student, CSULB</div>
+                <div className="mt-2 text-blue-500 text-opacity-90 text-sm 2xl:text-md">Cole Hartman <br /> Student, CSULB</div>
               </Paper>
             </motion.div>
 
@@ -293,7 +293,7 @@ function App() {
             >
               <Paper elevation={3} className="my-2 mx-2 w-auto px-2 py-1 text-left">
                 Easy to use
-                <div className="mt-2 text-blue-500 text-opacity-90 text-sm 2xl:text-lg">Cole Hartman <br /> Student, CSULB</div>
+                <div className="mt-2 text-blue-500 text-opacity-90 text-sm 2xl:text-md">Cole Hartman <br /> Student, CSULB</div>
               </Paper>
             </motion.div>
 
@@ -304,26 +304,26 @@ function App() {
             >
               <Paper elevation={3} className="my-2 mx-2 w-auto px-2 py-1 text-left">
                 I got the idea for my first web scraping project here!
-                <div className="mt-2 text-blue-500 text-opacity-90 text-sm 2xl:text-lg">Cole Hartman <br /> Student, CSULB</div>
+                <div className="mt-2 text-blue-500 text-opacity-90 text-sm 2xl:text-md">Cole Hartman <br /> Student, CSULB</div>
               </Paper>
             </motion.div>
           </div>
 
           {/*Footer Section*/}
-          <div className="h-32 md:h-28 w-full mt-10 grid grid-cols-3 md:grid-cols-4 2xl:text-lg md:mb-10">
+          <div className="h-32 md:h-28 w-full mt-10 grid grid-cols-3 md:grid-cols-4 2xl:text-lg md:mb-10 lg:mb-0 xl:mt-32">
             <div className="col-span-2 flex flex-col items-left text-left pl-5 sm:pl-14 lg:pl-28 xl:pl-44 lg:w-3/4 2xl:w-full">
               <div className="font-bold flex gap-3 pb-1">
                 <TerminalIcon style={{ color: '#3B82F6' }} />
                 Project Pilot
               </div>
-              <div className="text-sm sm:text-md xl:text-lg 2xl:w-3/4">
+              <div className="text-sm sm:text-md xl:text-md 2xl:w-3/4">
                 Our mission is to give future tech leaders direction, standardization, consistency and transparency.
               </div>
             </div>
             <div className="hidden md:block"></div>
             <div className="flex flex-col text-left pl-10 lg:pl-0">
               <div className="font-bold">Links</div>
-              <a href="https://www.linkedin.com/in/coleahartman/" target="_blank" className="text-sm sm:text-md xl:text-lg">LinkedIn</a>
+              <a href="https://www.linkedin.com/in/coleahartman/" target="_blank" className="text-sm sm:text-md xl:text-md">LinkedIn</a>
             </div>
           </div>
 
