@@ -5,6 +5,8 @@ import Navbar from '../components/navbar.jsx';
 import AuthWrapper from '../components/AuthWrapper.jsx'
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import OpenAI from "openai";
+import { supabase } from '../config/supabaseClient.js';
+
 
 export default function Form() {
   const [step, setStep] = useState(0);
@@ -17,6 +19,7 @@ export default function Form() {
   const [selectedAreas, setSelectedAreas] = useState([]);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [completion, setCompletion] = useState(null);
 
   {/*Transition Presets*/ }
   const fadeTransition = {
@@ -165,19 +168,63 @@ export default function Form() {
 
         const completionResult = await Completion(newPrompt);
         if (completionResult) {
-          console.log("COMPLETION RESULT:", completionResult);
-          navigate('/projects', { state: { completionResult } });
+          //console.log("COMPLETION RESULT:", completionResult);
+          setCompletion(completionResult)
         } else {
           // Handle the error case
           console.error("Failed to get completion result");
-          // You might want to show an error message to the user here
         }
         setIsSubmitting(false);
       };
-
       submitForm();
     }
   }, [isSubmitting, navigate]);
+
+  // Parse completion result
+  const parseCompletion = (completionText) => {
+    const projects = completionText.split(/\d+\.\s+Title:/).slice(1); // Split by project number and remove empty first element
+    return projects.map(project => {
+      const [title, rest] = project.split('Short Description:');
+      const [shortDescription, longDescription] = rest.split('Long Description:');
+      return {
+        title: title.trim(),
+        short_description: shortDescription.trim(),
+        long_description: longDescription.trim()
+      };
+    });
+  };
+
+  // Handle Supabase insertion
+  useEffect(() => {
+    const insertProjects = async () => {
+      if (completion) {
+        const parsedProjects = parseCompletion(completion);
+        for (const project of parsedProjects) {
+          try {
+            const { data, error } = await supabase
+              .from('projects')
+              .insert([
+                {
+                  title: project.title,
+                  short_description: project.short_description,
+                  long_description: project.long_description,
+                  // Add any other relevant fields, e.g., user_id if you're tracking which user created the project
+                }
+              ]);
+
+            if (error) throw error;
+            console.log('Project inserted successfully:', data);
+          } catch (error) {
+            console.error('Error inserting project:', error);
+          }
+        }
+        console.log('All projects inserted');
+        navigate('/projects');
+      }
+    };
+
+    insertProjects();
+  }, [completion, navigate]);
 
   const renderStep = () => {
     switch (step) {
