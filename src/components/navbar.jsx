@@ -6,7 +6,7 @@ export default function Navbar() {
   const navigate = useNavigate();
 
   return (
-    <div className=''>
+    <div className='mb-10'>
       <div className='flex flex-row gap-12 md:gap-40 xl:gap-72 justify-center items-center'>
         <button className='font-bold mx-0.5' onClick={() => navigate('/')}>PROJECT PILOT</button>
         <NavbarButtons />

@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '../components/navbar.jsx';
 import AuthWrapper from '../components/AuthWrapper.jsx'
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import OpenAI from "openai";
 
 export default function Form() {
   const [step, setStep] = useState(0);
@@ -15,6 +16,8 @@ export default function Form() {
   const [selectedPreferences, setSelectedPreferences] = useState([]);
   const [selectedAreas, setSelectedAreas] = useState([]);
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   {/*Transition Presets*/ }
   const fadeTransition = {
     initial: { opacity: 0, y: -40 },
@@ -22,6 +25,8 @@ export default function Form() {
     exit: { opacity: 0, y: 40 },
     transition: { duration: 0.8 }
   };
+
+  const nextStep = () => setStep(prevStep => prevStep + 1);
 
   {/* Handle Language Select */ }
   const handleLanguageToggle = (language) => {
@@ -130,14 +135,49 @@ export default function Form() {
     nextStep();
   };
 
-  useEffect(() => {
-    console.log(prompt)
-  }, [prompt])
+  //useEffect(() => {
+  //  console.log(prompt)
+  //}, [prompt])
 
 
   const navigate = useNavigate();
 
-  const nextStep = () => setStep(prevStep => prevStep + 1);
+  {/* On submit, prompt GPT */ }
+  async function Completion(prompt) {
+    try {
+      console.log("PROMPT REQUESTED", prompt);
+      const openai = new OpenAI({ apiKey: import.meta.env.VITE_OPENAI_API_KEY, dangerouslyAllowBrowser: true });
+      const result = await openai.chat.completions.create({
+        messages: [{ role: "system", content: prompt }],
+        model: "gpt-4o-mini",
+      });
+      return result.choices[0].message.content;
+    } catch (error) {
+      console.error("Error fetching completion:", error);
+      return null;
+    }
+  }
+
+  useEffect(() => {
+    if (isSubmitting) {
+      const submitForm = async () => {
+        const newPrompt = prompt + "Please provide 10 project ideas in raw text format based off the previous prompt from the user. For each project, include the following: 1. A title for the project. 2. A short description (1-2 sentences) summarizing the project's purpose and key features. 3. A long description (3-4 sentences) detailing the project's scope, potential challenges, and implementation ideas. Ensure each project idea aligns roughly with the specified interests, technologies, and preferences of the user. Feel free to exclude projects that do not fit these criteria but it is not necessary. Avoid providing any additional details such as implementation steps or code snippets. Maintain a consistent format for each project idea. Do not use any markdown formatting. Return only the project titles, short descriptions, and long descriptions as specified.";
+
+        const completionResult = await Completion(newPrompt);
+        if (completionResult) {
+          console.log("COMPLETION RESULT:", completionResult);
+          navigate('/projects', { state: { completionResult } });
+        } else {
+          // Handle the error case
+          console.error("Failed to get completion result");
+          // You might want to show an error message to the user here
+        }
+        setIsSubmitting(false);
+      };
+
+      submitForm();
+    }
+  }, [isSubmitting, navigate]);
 
   const renderStep = () => {
     switch (step) {
@@ -152,7 +192,7 @@ export default function Form() {
               whileHover={{ scale: 1.08 }}
               className='bg-opacity-50 mt-20 mb-2 text-xl p-5 rounded-xl bg-blue-500 hover:bg-opacity-100 w-36 text-center cursor-pointer'
               onClick={() => {
-                setPrompt("Generate a computer science project for me. First I will let you get to know me and my skill level. ");
+                setPrompt("PROMPT: Generate a computer science project for me. First I will let you get to know me and my skill level. Then I will describe what I want for my project ");
                 nextStep()
               }}
             >
@@ -580,9 +620,10 @@ export default function Form() {
                   { text: "Healthcare Professionals", prompt: "My target audience is healthcare professionals. " },
                   { text: "Environmental Organizations", prompt: "My target audience is environmental organizations. " },
                   { text: "Gamers", prompt: "My target audience is gamers. " },
-                  { text: "Artists", prompt: "My target audience is artists. " },
                   { text: "Entrepreneurs", prompt: "My target audience is entrepreneurs. " },
-                  { text: "Other", prompt: "Target audience: Other. " }
+                  { text: "Other", prompt: "Target audience: Other. " },
+                  { text: "No", prompt: "I have no target audience. " }
+
                 ].map(({ text, prompt: buttonPrompt }) => (
                   <motion.button
                     key={text}
@@ -891,20 +932,15 @@ export default function Form() {
               Next Step
             </h2>
             <p className="text-lg md:text-2xl mb-8 text-center w-full md:w-3/4">
-              Great job! You've completed all the questions. Ready to generate your projects?
+              Great job! You've completed all the questions. Let's generate your projects.
             </p>
             <motion.button
               whileHover={{ scale: 1.05 }}
               className="mt-4 bg-blue-500 text-white px-6 py-3 rounded-lg text-lg md:text-xl w-full md:w-auto"
-              onClick={() => {
-                console.log("Final prompt:", prompt);
-                nextStep()
-                setTimeout(() => {
-                  navigate('/projects');
-                }, 900);
-              }}
+              onClick={() => setIsSubmitting(true)}
+              disabled={isSubmitting}
             >
-              Submit
+              {isSubmitting ? 'Submitting...' : 'Submit'}
             </motion.button>
           </motion.div>
         );
