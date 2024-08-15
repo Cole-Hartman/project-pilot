@@ -179,7 +179,7 @@ export default function Form() {
     }
   }, [isSubmitting, navigate]);
 
-  // Parse completion result
+  {/*Parse completion result*/ }
   const parseCompletion = (completionText) => {
     const projects = [];
     const projectRegex = /Title:\s*(.*?)\s*Short Description:\s*(.*?)\s*Long Description:\s*([\s\S]*?)(?=\n\s*Title:|$)/g;
@@ -198,6 +198,7 @@ export default function Form() {
   };
 
   // Handle Supabase insertion
+  {/*Supabase Intertion*/ }
   useEffect(() => {
     const insertProjects = async () => {
       if (completion) {
@@ -207,6 +208,17 @@ export default function Form() {
 
         if (parsedProjects.length === 0) {
           console.error("No projects were parsed. Check the completion format.");
+          return;
+        }
+
+        // Fetch the current user
+        const { data: { user }, error: userError } = await supabase.auth.getUser()
+        if (userError) {
+          console.log('Error fetching user:', userError)
+          return;
+        }
+        if (!user) {
+          console.error('No user is currently logged in');
           return;
         }
 
@@ -220,7 +232,8 @@ export default function Form() {
                   title: project.title,
                   short_description: project.short_description,
                   long_description: project.long_description,
-                  // Add any other relevant fields, e.g., user_id if you're tracking which user created the project
+                  user_email: user.email,
+                  user_id: user.id
                 }
               ]);
 

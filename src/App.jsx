@@ -31,7 +31,7 @@ function App() {
 
         <div className="flex flex-col justify-center items-center mt-10 text-center">
           <motion.div
-            className="mx-3 my-2"
+            className="mx-3 mt-5 2xl:mb-6"
             initial={{ opacity: 0, y: [-50] }}
             animate={{ opacity: 1, y: 0 }}
             transition={{
@@ -40,8 +40,8 @@ function App() {
               bounce: 0.3
             }}
           >
-            <div className="text-5xl 2xl:text-7xl font-bold mb-4">YOUR DREAM PROJECT</div>
-            <div className="text-5xl 2xl:text-7xl font-bold text-blue-500">STARTS HERE</div>
+            <div className="text-5xl 2xl:text-6xl font-bold mb-4">YOUR DREAM PROJECT</div>
+            <div className="text-5xl 2xl:text-6xl font-bold text-blue-500">STARTS HERE</div>
           </motion.div>
           <motion.div
             className="mx-3 my-2"
@@ -52,15 +52,15 @@ function App() {
               duration: 1.7,
               bounce: 0.3
             }}>
-            <div className="text-lg px-2 mt-3 flex flex-col justify-center items-center">
+            <div className="text-lg px-2 mt-3 2xl:mb-9 flex flex-col justify-center items-center">
               <div className="md:w-2/3">
-                <div className="mb-2 inline 2xl:text-2xl">Find Personalized CS project Ideas tailored against your current </div>
-                <div className="text-blue-500 inline 2xl:text-2xl">skill level, </div>
-                <div className="inline 2xl:text-2xl">and</div>
-                <div className="text-blue-500 inline 2xl:text-2xl"> ambition.</div>
+                <div className="mb-2 inline 2xl:text-xl">Find Personalized CS project Ideas tailored against your current </div>
+                <div className="text-blue-500 inline 2xl:text-xl">skill level, </div>
+                <div className="inline 2xl:text-xl">and</div>
+                <div className="text-blue-500 inline 2xl:text-xl"> ambition.</div>
               </div>
 
-              <div className="pt-3 md:w-3/4 2xl:text-2xl">
+              <div className="pt-3 md:w-3/4 2xl:text-xl">
                 <div className="inline">Build around structured prompt engineering designed for </div>
                 <div className="inline text-blue-500">optimal AI comprehension</div>
               </div>
@@ -110,8 +110,8 @@ function App() {
 
           {/*Works Around You Section*/}
           <div className="mt-10 pt-10 mx-5" ref={aboutRef}>
-            <div className="inline text-5xl 2xl:text-7xl font-bold">WORKS AROUND </div>
-            <div className="inline 2xl:block text-5xl 2xl:text-7xl font-bold text-blue-500">YOU</div>
+            <div className="inline text-5xl 2xl:text-6xl font-bold">WORKS AROUND </div>
+            <div className="inline 2xl:block text-5xl 2xl:text-6xl font-bold text-blue-500">YOU</div>
           </div>
 
           <div className="mt-2 mx-2 text-center 2xl:text-xl md:w-3/4">Project Pilot is a tool build around refined and structured prompt engineering that allows you to easily communicate your ideas and needs for optimal AI comprehension to only generate tailored and industry standard computer science project ideas for you.</div>
@@ -189,7 +189,7 @@ function App() {
           </div>
 
           {/*Land Jobs Section*/}
-          <div className="text-5xl 2xl:text-7xl font-bold mt-28 lg:mt-32 md:mt-20 2xl:mb-20">LAND JOBS</div>
+          <div className="text-5xl 2xl:text-6xl font-bold mt-28 lg:mt-32 md:mt-20 2xl:mb-20">LAND JOBS</div>
 
           <div className="w-full mx-auto px-4 md:w-3/4 lg:w-2/4">
             <motion.div
@@ -226,7 +226,7 @@ function App() {
           </motion.div>
 
           {/*---- QandA Section ----*/}
-          <div className="mx-3 text-5xl 2xl:text-7xl font-bold mt-10 lg:mt-28">
+          <div className="mx-3 text-5xl 2xl:text-6xl font-bold mt-10 lg:mt-28">
             <div className="mb-5">Q&A</div>
           </div>
 
