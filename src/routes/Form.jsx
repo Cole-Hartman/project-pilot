@@ -194,7 +194,6 @@ export default function Form() {
         long_description: longDescription.trim()
       });
     }
-
     return projects;
   };
 
@@ -234,12 +233,13 @@ export default function Form() {
         console.log('Insertion Complete');
         navigate('/projects');
       } else {
-        console.error("Completion is null or undefined");
+        //
       }
     };
 
     insertProjects();
   }, [completion, navigate]);
+
   const renderStep = () => {
     switch (step) {
       case 0:
