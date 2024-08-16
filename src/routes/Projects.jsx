@@ -5,8 +5,9 @@ import Navbar from "../components/navbar"
 import Expand from '../components/Expand.jsx';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import DeleteIcon from '@mui/icons-material/Delete';
 
-const ProjectCard = ({ project, onExpand, onToggleSave }) => {
+const ProjectCard = ({ project, onExpand, onToggleSave, onDelete }) => {
   return (
     <div className="border p-4 rounded-lg relative">
       <h3 className="text-xl font-bold">{project.title}</h3>
@@ -22,6 +23,12 @@ const ProjectCard = ({ project, onExpand, onToggleSave }) => {
         onClick={() => onToggleSave(project)}
       >
         {project.saved ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+      </button>
+      <button
+        className="absolute bottom-2 right-2 text-gray-500 hover:text-red-500"
+        onClick={() => onDelete(project)}
+      >
+        <DeleteIcon />
       </button>
     </div>
   );
@@ -87,6 +94,25 @@ const Projects = () => {
     }
   };
 
+  const handleDelete = async (project) => {
+    try {
+      const { error } = await supabase
+        .from('projects')
+        .delete()
+        .eq('user_id', currentUser.id)
+        .eq('title', project.title);
+
+      if (error) throw error;
+
+      setProjects(projects.filter(p =>
+        !(p.user_id === project.user_id && p.title === project.title)
+      ));
+    } catch (err) {
+      console.error('Error deleting project:', err);
+      setError(err.message);
+    }
+  };
+
   const handleExpand = (project) => {
     setExpandedProject(project);
   };
@@ -122,6 +148,7 @@ const Projects = () => {
                 project={project}
                 onExpand={handleExpand}
                 onToggleSave={handleToggleSave}
+                onDelete={handleDelete}
               />
             ))}
           </div>
@@ -136,13 +163,14 @@ const Projects = () => {
       <section>
         <h1 className="text-3xl font-bold mb-6 px-3 text-white">My Projects</h1>
         {unsavedProjects.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 px-3 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 px-3 mb-10 lg:grid-cols-3 gap-4">
             {unsavedProjects.map((project) => (
               <ProjectCard
                 key={`${project.user_id}-${project.title}`}
                 project={project}
                 onExpand={handleExpand}
                 onToggleSave={handleToggleSave}
+                onDelete={handleDelete}
               />
             ))}
           </div>
