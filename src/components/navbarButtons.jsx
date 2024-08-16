@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import TerminalIcon from '@mui/icons-material/Terminal';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../config/supabaseClient.js';
 
@@ -38,16 +39,14 @@ export default function NavbarButtons() {
 
   if (!session) {
     return (
-      <>
-        <div className='text-md flex items-center justify-center lg:gap-3'>
-          <button onClick={() => navigate('/form')} className="pr-3 text-lg">
-            Log In
-          </button>
-          <div className='' size="large">
-            <TerminalIcon onClick={() => navigate('/')} style={{ color: '#3B82F6' }} fontSize={'large'} />
-          </div>
+      <div className='text-md flex items-center justify-center lg:gap-3'>
+        <button onClick={() => navigate('/form')} className="pr-3 text-lg">
+          Log In
+        </button>
+        <div className='' size="large">
+          <TerminalIcon onClick={() => navigate('/')} style={{ color: '#3B82F6' }} fontSize={'large'} />
         </div>
-      </>
+      </div>
     );
   }
 
@@ -57,15 +56,23 @@ export default function NavbarButtons() {
         Projects
       </button>
       <button onClick={handleSignOut} className="pr-1">Sign Out</button>
-      {profilePicUrl && (
-        <button onClick={() => navigate('/profile')}>
+      <button onClick={() => navigate('/profile')}>
+        {profilePicUrl ? (
           <img
             src={profilePicUrl}
             alt="Profile"
             className="w-10 h-10 rounded-full ml-2 my-1 object-cover"
           />
-        </button>
-      )}
+        ) : (
+          <AccountCircleIcon
+            style={{
+              fontSize: 46,
+              marginLeft: '0.2rem',
+              color: '#4B5563' // This is roughly equivalent to text-gray-600 in Tailwind
+            }}
+          />
+        )}
+      </button>
     </div>
   );
 }
