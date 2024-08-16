@@ -197,7 +197,6 @@ export default function Form() {
     return projects;
   };
 
-  // Handle Supabase insertion
   {/*Supabase Intertion*/ }
   useEffect(() => {
     const insertProjects = async () => {

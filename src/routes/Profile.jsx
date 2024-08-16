@@ -15,53 +15,42 @@ import {
 
 function ProfilePage() {
   const [user, setUser] = useState(null);
-  const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState(false);
   const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'info' });
 
   useEffect(() => {
-    fetchUserAndProfile();
+    fetchUser();
   }, []);
 
-  async function fetchUserAndProfile() {
+  async function fetchUser() {
     setLoading(true);
-    const { data: { user }, error: userError } = await supabase.auth.getUser();
+    const { data: { user }, error } = await supabase.auth.getUser();
 
-    if (userError) {
-      console.error('Error fetching user:', userError);
-      setLoading(false);
-      return;
-    }
-
-    if (user) {
-      const { data: profile, error: profileError } = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('id', user.id)
-        .single();
-
-      if (profileError) {
-        console.error('Error fetching profile:', profileError);
-      } else {
-        setUser(user);
-        setProfile(profile);
-      }
+    if (error) {
+      console.error('Error fetching user:', error);
+      showSnackbar('Error fetching user data', 'error');
+    } else if (user) {
+      setUser(user);
+      console.log("User data:", user);
     }
     setLoading(false);
   }
 
-  async function updateProfile(e) {
+  async function updateUser(e) {
     e.preventDefault();
     setLoading(true);
-    const { error } = await supabase
-      .from('profiles')
-      .update(profile)
-      .eq('id', user.id);
+    const { data, error } = await supabase.auth.updateUser({
+      data: {
+        full_name: user.user_metadata.full_name,
+        bio: user.user_metadata.bio
+      }
+    });
 
     if (error) {
       showSnackbar(error.message, 'error');
     } else {
+      setUser(data.user);
       showSnackbar('Profile updated successfully', 'success');
       setEditing(false);
     }
@@ -80,7 +69,7 @@ function ProfilePage() {
   };
 
   if (loading) return <Typography>Loading...</Typography>;
-  if (!user || !profile) return <Typography>No user data found</Typography>;
+  if (!user) return <Typography>No user data found</Typography>;
 
   return (
     <Container maxWidth="md">
@@ -88,22 +77,24 @@ function ProfilePage() {
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mb: 4 }}>
           <Avatar
             sx={{ width: 100, height: 100, mb: 2 }}
-            src={profile.avatar_url}
+            src={user.user_metadata.avatar_url}
           />
-
           <Typography variant="body1" color="textSecondary">
             {user.email}
           </Typography>
         </Box>
 
-        <form onSubmit={updateProfile}>
+        <form onSubmit={updateUser}>
           <Grid container spacing={3} className="flex items-center justify-center">
             <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
                 label="Full Name"
-                value={profile.full_name || ''}
-                onChange={(e) => setProfile({ ...profile, full_name: e.target.value })}
+                value={user.user_metadata.full_name || ''}
+                onChange={(e) => setUser({
+                  ...user,
+                  user_metadata: { ...user.user_metadata, full_name: e.target.value }
+                })}
                 disabled={!editing}
               />
             </Grid>
@@ -114,8 +105,11 @@ function ProfilePage() {
                 label="Bio"
                 multiline
                 rows={4}
-                value={profile.bio || ''}
-                onChange={(e) => setProfile({ ...profile, bio: e.target.value })}
+                value={user.user_metadata.bio || ''}
+                onChange={(e) => setUser({
+                  ...user,
+                  user_metadata: { ...user.user_metadata, bio: e.target.value }
+                })}
                 disabled={!editing}
               />
             </Grid>

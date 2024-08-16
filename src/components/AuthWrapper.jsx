@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Auth } from '@supabase/auth-ui-react'
 import { supabase } from '../config/supabaseClient'
-import CustomAuth from './CustomAuth'
 import SignIn from './SignIn.jsx'
 
 export default function AuthWrapper({ children }) {

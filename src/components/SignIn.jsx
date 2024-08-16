@@ -3,7 +3,7 @@ import { supabase } from '../config/supabaseClient';
 import { Button, TextField, Typography, Container, Box, Snackbar, Alert } from '@mui/material';
 import GoogleIcon from '@mui/icons-material/Google';
 
-function Authentication() {
+export default function SignIn() {
   const [isSignIn, setIsSignIn] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -135,5 +135,3 @@ function Authentication() {
     </Container>
   );
 }
-
-export default Authentication;
