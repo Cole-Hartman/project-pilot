@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '../config/supabaseClient'
-import SignIn from './SignIn.jsx'
+import SignInUp from './SignInUp.jsx'
 
 export default function AuthWrapper({ children }) {
   const [session, setSession] = useState(null)
@@ -20,7 +20,7 @@ export default function AuthWrapper({ children }) {
   }, [])
 
   if (!session) {
-    return <SignIn />
+    return <SignInUp />
   } else {
     return children
   }

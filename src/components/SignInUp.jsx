@@ -3,7 +3,7 @@ import { supabase } from '../config/supabaseClient';
 import { Button, TextField, Typography, Container, Box, Snackbar, Alert } from '@mui/material';
 import GoogleIcon from '@mui/icons-material/Google';
 
-export default function SignIn() {
+export default function SignInUp() {
   const [isSignIn, setIsSignIn] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -20,7 +20,6 @@ export default function SignIn() {
       showSnackbar(error.message, 'error');
     } else if (data && data.user) {
       showSnackbar('Signed in successfully', 'success');
-      // Add logic for successful sign-in (e.g., update app state, redirect)
     }
     setLoading(false);
   };
@@ -117,11 +116,9 @@ export default function SignIn() {
           <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }} disabled={loading}>
             {isSignIn ? 'Sign In' : 'Sign Up'}
           </Button>
-          {isSignIn && (
-            <Button fullWidth variant="outlined" startIcon={<GoogleIcon />} onClick={handleGoogleSignIn} disabled={loading} sx={{ mb: 2 }}>
-              Sign In with Google
-            </Button>
-          )}
+          <Button fullWidth variant="outlined" startIcon={<GoogleIcon />} onClick={handleGoogleSignIn} disabled={loading} sx={{ mb: 2 }}>
+            {isSignIn ? 'Sign In with Google' : 'Sign up with Google'}
+          </Button>
           <Button fullWidth variant="text" onClick={toggleForm}>
             {isSignIn ? "Don't have an account? Sign Up" : "Already have an account? Sign In"}
           </Button>
