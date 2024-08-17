@@ -12,12 +12,14 @@ import {
   Snackbar,
   Alert
 } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 function ProfilePage() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState(false);
   const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'info' });
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchUser();
@@ -32,7 +34,6 @@ function ProfilePage() {
       showSnackbar('Error fetching user data', 'error');
     } else if (user) {
       setUser(user);
-      console.log("User data:", user);
     }
     setLoading(false);
   }
@@ -66,6 +67,10 @@ function ProfilePage() {
       return;
     }
     setSnackbar({ ...snackbar, open: false });
+  };
+
+  const handleGoHome = () => {
+    navigate('/');
   };
 
   if (loading) return <Typography>Loading...</Typography>;
@@ -115,21 +120,26 @@ function ProfilePage() {
             </Grid>
           </Grid>
 
-          <Box sx={{ mt: 3, display: 'flex', justifyContent: 'flex-end' }}>
-            {editing ? (
-              <>
-                <Button onClick={() => setEditing(false)} sx={{ mr: 2 }}>
-                  Cancel
+          <Box sx={{ mt: 3, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <Button onClick={handleGoHome} variant="outlined" color="primary">
+              Go Home
+            </Button>
+            <Box>
+              {editing ? (
+                <>
+                  <Button onClick={() => setEditing(false)} sx={{ mr: 2 }}>
+                    Cancel
+                  </Button>
+                  <Button type="submit" variant="contained" color="primary" disabled={loading}>
+                    Save Changes
+                  </Button>
+                </>
+              ) : (
+                <Button onClick={() => setEditing(true)} variant="outlined" color="primary">
+                  Edit Profile
                 </Button>
-                <Button type="submit" variant="contained" color="primary" disabled={loading}>
-                  Save Changes
-                </Button>
-              </>
-            ) : (
-              <Button onClick={() => setEditing(true)} variant="outlined" color="primary">
-                Edit Profile
-              </Button>
-            )}
+              )}
+            </Box>
           </Box>
         </form>
       </Paper>
