@@ -194,7 +194,7 @@ const Projects = () => {
   if (error) return <div className="text-white">Error: {error}</div>;
 
   const savedProjects = projects.filter(project => project.saved);
-  const unsavedProjects = projects.filter(project => !project.saved);
+  const unsavedProjects = projects.filter(project => !project.saved).reverse();
 
   return (
     <div className="mx-screen bg-gradient-to-br from-black via-gray-900 to-blue-500 min-h-screen overflow-y-auto">

@@ -907,7 +907,7 @@ export default function Form() {
                 Do you prefer using any of the following?
               </div>
               <div className="flex flex-wrap justify-center gap-2 md:gap-4 md:mb-10 w-full">
-                {['React', 'Angular', 'Vue.js', 'Node.js', 'Django', 'Flask', 'Spring Boot', 'Laravel', 'Express.js', 'MongoDB', 'PostgreSQL', 'Docker'].map(tech => (
+                {['Next.js', 'React.js', 'Angular', 'Vue.js', 'Node.js', 'Django', 'Flask', 'Laravel', 'Express.js', 'MongoDB', 'PostgreSQL', 'Docker'].map(tech => (
                   <motion.button
                     key={tech}
                     whileHover={{ scale: 1.05 }}
