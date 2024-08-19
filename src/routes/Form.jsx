@@ -6,6 +6,7 @@ import AuthWrapper from '../components/AuthWrapper.jsx'
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import OpenAI from "openai";
 import { supabase } from '../config/supabaseClient.js';
+import { CircularProgress } from '@mui/material';
 
 
 export default function Form() {
@@ -19,6 +20,7 @@ export default function Form() {
   const [selectedAreas, setSelectedAreas] = useState([]);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
   const [completion, setCompletion] = useState(null);
 
   {/*Transition Presets*/ }
@@ -98,7 +100,7 @@ export default function Form() {
     if (selectedTechStack.length === 0) {
       setPrompt(prompt + "I don't have a specific tech stack in mind. ");
     } else {
-      setPrompt(prompt + `I'm interested in using the following technologies: ${selectedTechStack.join(', ')}. `);
+      setPrompt(prompt + `I enjoy using the following technologies: ${selectedTechStack.join(', ')}. `);
     }
     nextStep();
   };
@@ -161,11 +163,53 @@ export default function Form() {
     }
   }
 
+  {/*Fetch already generated projects*/ }
+  const noDuplicates = async () => {
+    try {
+      // Fetch user
+      const { data: { user }, error: userError } = await supabase.auth.getUser();
+      if (userError) throw userError;
+      if (!user) {
+        console.log('No user is currently logged in');
+        return;
+      }
+
+      // Fetch user's projects
+      const { data, error } = await supabase
+        .from('projects')
+        .select('*')
+        .eq('user_id', user.id);
+
+      if (error) throw error;
+
+      if (data[0]) {
+        var projects = "Don't generate any of the following projects: "
+        for (let i = 0; i < data.length; i++) {
+          projects = projects.concat(data[i].title + ', ')
+        }
+      } else {
+        var projects = ""
+      }
+
+    } catch (err) {
+      console.error('Error:', err);
+      setError(err.message);
+    }
+
+    return projects
+  };
+
+
+  {/*Handle Submit*/ }
   useEffect(() => {
     if (isSubmitting) {
       const submitForm = async () => {
-        const newPrompt = prompt + "INSTRUCTION: Please provide 10 project ideas in the following specific format: Title: [Project Title] Short Description: [A brief one-sentence description of the project] Long Description:[A more detailed 3-4 sentence description of the project, including its purpose, key features, and potential challenges] Title: [Project Title] Short Description: [A brief one-sentence description of the project] Long Description: [A more detailed 3-4 sentence description of the project, including its purpose, key features, and potential challenges] [Continue for all 10 projects] Please ensure that each project follows this exact format, with Title:, Short Description:, and Long Description: labels for each project. Do not include any additional text or formatting outside of this structure. Ensure each project idea aligns roughly with the specified interests, technologies, and preferences of the user. Avoid providing any additional details such as implementation steps or code snippets. Maintain a consistent format for each project idea. Do not use any markdown formatting. Return the projects only in the format specified.";
-        const completionResult = await Completion(newPrompt);
+        const currProjects = await noDuplicates()
+
+        const newPrompt = prompt + currProjects
+
+        const newPrompt2 = newPrompt + "INSTRUCTION: Please provide 10 project ideas in the following specific format: Title: [Project Title] Short Description: [A brief one-sentence description of the project] Long Description:[A more detailed 3-4 sentence description of the project, including its purpose, key features, and potential challenges] Title: [Project Title] Short Description: [A brief one-sentence description of the project] Long Description: [A more detailed 3-4 sentence description of the project, including its purpose, key features, and potential challenges] [Continue for all 10 projects] Please ensure that each project follows this exact format, with Title:, Short Description:, and Long Description: labels for each project. Do not include any additional text or formatting outside of this structure. Ensure each project idea aligns roughly with the specified interests, technologies, and preferences of the user. Avoid providing any additional details such as implementation steps or code snippets. Maintain a consistent format for each project idea. Do not use any markdown formatting. Return the projects only in the format specified.";
+        const completionResult = await Completion(newPrompt2);
         if (completionResult) {
           //console.log("COMPLETION RESULT:", completionResult);
           setCompletion(completionResult)
@@ -174,6 +218,7 @@ export default function Form() {
           console.error("Failed to get completion result");
         }
         setIsSubmitting(false);
+        setIsUploading(true);
       };
       submitForm();
     }
@@ -201,7 +246,7 @@ export default function Form() {
   useEffect(() => {
     const insertProjects = async () => {
       if (completion) {
-        console.log("Raw completion text:", completion);
+        //console.log("Raw completion text:", completion);
         const parsedProjects = parseCompletion(completion);
         console.log(`Parsed ${parsedProjects.length} projects:`, parsedProjects);
 
@@ -244,6 +289,7 @@ export default function Form() {
         }
         console.log('Insertion Complete');
         navigate('/projects');
+        setIsUploading(false)
       } else {
         //
       }
@@ -257,15 +303,16 @@ export default function Form() {
       case 0:
         return (
           <motion.div key="step0" {...fadeTransition} className='flex flex-col justify-center items-center'>
-            <div className='flex flex-col items-center md:flex-row md:gap-4 md:mb-20'>
+            <div className='flex flex-col items-center md:flex-row md:gap-4 md:mb-5'>
               <div className="text-6xl 2xl:text-8xl font-bold">GET</div>
               <div className="text-6xl 2xl:text-8xl font-bold text-blue-500">STARTED</div>
             </div>
+            <div className='md:mb-1 text-center text-xl font-bold'>Let us learn a bit about you and your projects needs.</div>
             <motion.div
               whileHover={{ scale: 1.08 }}
               className='bg-opacity-50 mt-20 mb-2 text-xl p-5 rounded-xl bg-blue-500 hover:bg-opacity-100 w-36 text-center cursor-pointer'
               onClick={() => {
-                setPrompt("PROMPT: Generate a computer science project for me. First I will let you get to know me and my skill level. Then I will describe what I want for my project ");
+                setPrompt("PROMPT: Generate coding project ideas for me. First I will let you get to know me and my skill level. Then I will describe what I want for my project. ");
                 nextStep()
               }}
             >
@@ -273,7 +320,7 @@ export default function Form() {
             </motion.div>
             <div className='flex flex-row gap-1'>
               <AccessTimeIcon />
-              Takes 3 minutes
+              Takes 2 minutes
             </div>
           </motion.div>
         );
@@ -415,10 +462,10 @@ export default function Form() {
               className='flex flex-col justify-center items-center'
             >
               <div className="text-2xl w-full md:w-3/4 text-center 2xl:text-3xl font-bold mb-10">
-                What programming languages are you comfortable with? None is ok!
+                What programming languages are you comfortable with?
               </div>
               <div className="flex flex-wrap justify-center gap-4 md:mb-10 w-full px-4 md:px-0">
-                {['Python', 'JavaScript', 'Java', 'C', 'C++', 'C#', 'Ruby', 'Go', 'Swift', 'Kotlin', 'Rust'].map(language => (
+                {['Python', 'JavaScript', 'HTML/CSS', 'Java', 'C', 'C++', 'C#', 'Lua', 'R', 'Ruby', 'Go', 'Swift', 'Perl', 'Kotlin', 'Rust', 'Other'].map(language => (
                   <motion.button
                     key={language}
                     whileHover={{ scale: 1.05 }}
@@ -972,7 +1019,7 @@ export default function Form() {
                 Do any of these areas spark interest?
               </div>
               <div className="flex flex-wrap justify-center gap-2 md:gap-4 mb-10 w-full">
-                {['Web Development', 'Mobile Apps', 'AI/Machine Learning', 'Data Science', 'Cybersecurity', 'IoT', 'Cloud Computing', 'DevOps', 'Blockchain', 'AR/VR'].map(area => (
+                {['Web Development', 'Mobile Apps', 'AI/Machine Learning', 'Data Science', 'Cybersecurity', 'Cloud Computing', 'DevOps', 'AR/VR', 'Operating Systems', 'Robotics'].map(area => (
                   <motion.button
                     key={area}
                     whileHover={{ scale: 1.05 }}
@@ -1009,11 +1056,22 @@ export default function Form() {
             </p>
             <motion.button
               whileHover={{ scale: 1.05 }}
-              className="mt-4 bg-blue-500 text-white px-6 py-3 rounded-lg text-lg md:text-xl w-full md:w-auto"
+              className="mt-4 bg-blue-500 text-white px-6 py-3 rounded-lg text-lg md:text-xl w-full md:w-auto flex items-center justify-center"
               onClick={() => setIsSubmitting(true)}
               disabled={isSubmitting}
             >
-              {isSubmitting ? 'Submitting...' : 'Submit'}
+              {(isSubmitting || isUploading) && (
+                <CircularProgress
+                  size={24}
+                  color="inherit"
+                  className="mr-2"
+                />
+              )}
+              {isSubmitting
+                ? 'Generating...'
+                : isUploading
+                  ? 'Uploading...'
+                  : 'Submit'}
             </motion.button>
           </motion.div>
         );
