@@ -34,6 +34,7 @@ function ProfilePage() {
       showSnackbar('Error fetching user data', 'error');
     } else if (user) {
       setUser(user);
+      console.log(user)
     }
     setLoading(false);
   }
@@ -95,7 +96,7 @@ function ProfilePage() {
               <TextField
                 fullWidth
                 label="Full Name"
-                value={user.user_metadata.full_name || ''}
+                value={user.user_metadata.first_name + " " + user.user_metadata.last_name || user.user_metadata.full_name || ''}
                 onChange={(e) => setUser({
                   ...user,
                   user_metadata: { ...user.user_metadata, full_name: e.target.value }
@@ -127,12 +128,14 @@ function ProfilePage() {
             <Box>
               {editing ? (
                 <>
-                  <Button onClick={() => setEditing(false)} sx={{ mr: 2 }}>
-                    Cancel
-                  </Button>
-                  <Button type="submit" variant="contained" color="primary" disabled={loading}>
-                    Save Changes
-                  </Button>
+                  <div className='flex flex-col items-end'>
+                    <Button onClick={() => setEditing(false)} sx={{ mr: 2 }}>
+                      Cancel
+                    </Button>
+                    <Button type="submit" variant="contained" color="primary" disabled={loading}>
+                      Save Changes
+                    </Button>
+                  </div>
                 </>
               ) : (
                 <Button onClick={() => setEditing(true)} variant="outlined" color="primary">
