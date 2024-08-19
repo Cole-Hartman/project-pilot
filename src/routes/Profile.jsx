@@ -33,7 +33,6 @@ function ProfilePage() {
       console.error('Error fetching user:', error);
       showSnackbar('Error fetching user data', 'error');
     } else if (user) {
-      console.log(user)
 
       // Fix name
       if (!user.user_metadata.full_name && user.user_metadata.first_name && user.user_metadata.last_name) {

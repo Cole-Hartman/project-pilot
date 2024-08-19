@@ -6,8 +6,25 @@ import Expand from '../components/Expand.jsx';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import DeleteIcon from '@mui/icons-material/Delete';
+import CheckIcon from '@mui/icons-material/Check';
+import CloseIcon from '@mui/icons-material/Close';
 
 const ProjectCard = ({ project, onExpand, onToggleSave, onDelete }) => {
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  const handleDeleteClick = () => {
+    setIsDeleting(true);
+  };
+
+  const handleConfirmDelete = () => {
+    onDelete(project);
+    setIsDeleting(false);
+  };
+
+  const handleCancelDelete = () => {
+    setIsDeleting(false);
+  };
+
   return (
     <div className="border p-4 rounded-lg relative">
       <h3 className="text-xl font-bold">{project.title}</h3>
@@ -24,12 +41,29 @@ const ProjectCard = ({ project, onExpand, onToggleSave, onDelete }) => {
       >
         {project.saved ? <FavoriteIcon /> : <FavoriteBorderIcon />}
       </button>
-      <button
-        className="absolute bottom-2 right-2 text-gray-500 hover:text-red-500"
-        onClick={() => onDelete(project)}
-      >
-        <DeleteIcon />
-      </button>
+      {!isDeleting ? (
+        <button
+          className="absolute bottom-2 right-2 text-gray-500 hover:text-red-500"
+          onClick={handleDeleteClick}
+        >
+          <DeleteIcon />
+        </button>
+      ) : (
+        <div className="absolute bottom-2 right-2 flex space-x-2">
+          <button
+            className="bg-red-500 text-white w-10 h-10 p-1 mr-1 rounded"
+            onClick={handleConfirmDelete}
+          >
+            <CheckIcon fontSize="small" />
+          </button>
+          <button
+            className="bg-gray-500 text-white w-10 h-10 p-1 rounded"
+            onClick={handleCancelDelete}
+          >
+            <CloseIcon fontSize="small" />
+          </button>
+        </div>
+      )}
     </div>
   );
 };
