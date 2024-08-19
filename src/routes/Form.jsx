@@ -307,7 +307,7 @@ export default function Form() {
               <div className="text-6xl 2xl:text-8xl font-bold">GET</div>
               <div className="text-6xl 2xl:text-8xl font-bold text-blue-500">STARTED</div>
             </div>
-            <div className='md:mb-1 text-center text-xl font-bold'>Let us learn a bit about you and your projects needs.</div>
+            <div className='md:mb-1 text-center text-xl font-bold'>Let's learn a bit about you and your project's needs.</div>
             <motion.div
               whileHover={{ scale: 1.08 }}
               className='bg-opacity-50 mt-20 mb-2 text-xl p-5 rounded-xl bg-blue-500 hover:bg-opacity-100 w-36 text-center cursor-pointer'
@@ -448,7 +448,7 @@ export default function Form() {
                 exit: { opacity: 0, y: -5 }
               }}
               transition={{ duration: 0.5 }}
-              className="text-6xl 2xl:text-8xl mt-20 md:mt-0 font-bold mb-20 md:mb-28 text-center"
+              className="text-6xl 2xl:text-8xl mt-20 md:mt-0 font-bold mb-10 md:mb-28 text-center"
             >
               ABOUT YOU
             </motion.h2>
@@ -479,7 +479,7 @@ export default function Form() {
               </div>
               <motion.button
                 whileHover={{ scale: 1.05 }}
-                className="bg-opacity-50 mt-10 mb-2 text-xl p-5 rounded-xl bg-yellow-500 hover:bg-opacity-100 text-center cursor-pointer"
+                className="bg-opacity-50 mt-4 md:mt-10 mb-2 text-xl p-5 rounded-xl bg-yellow-500 hover:bg-opacity-100 text-center cursor-pointer"
                 onClick={handleLanguageConfirm}
               >
                 Continue
@@ -519,7 +519,7 @@ export default function Form() {
               <div className="text-2xl 2xl:text-3xl font-bold text-center">
                 How much time can you dedicate towards this project?
               </div>
-              <div className="flex flex-wrap justify-center gap-4 mt-20">
+              <div className="flex flex-wrap justify-center gap-4 mt-10 md:mt-16">
                 {[
                   { text: "Hours", prompt: "I can dedicate a few hours to this project. " },
                   { text: "Days", prompt: "I can dedicate a few days to this project. " },
@@ -631,7 +631,7 @@ export default function Form() {
               <div className="text-xl md:text-2xl 2xl:text-3xl font-bold mb-10 text-center w-full md:w-3/4">
                 How would you describe yourself as a developer?
               </div>
-              <div className="flex flex-wrap justify-center gap-2 md:gap-4 mb-10 w-full">
+              <div className="flex flex-wrap justify-center gap-2 md:gap-4 mb-2 md:mb-10 w-full">
                 {['Analytical', 'Innovative', 'Collaborative', 'Efficient', 'Curious', 'Adaptive', 'User-focused', 'Experienced', 'Passionate'].map(trait => (
                   <motion.button
                     key={trait}
@@ -646,7 +646,7 @@ export default function Form() {
               </div>
               <motion.button
                 whileHover={{ scale: 1.05 }}
-                className="bg-opacity-50 mt-6 md:mt-10 mb-2 text-lg md:text-xl p-4 md:p-5 rounded-xl bg-yellow-500 hover:bg-opacity-100 text-center cursor-pointer w-full md:w-auto"
+                className="bg-opacity-50 md:mt-10 mb-2 text-lg md:text-xl p-4 md:p-5 rounded-xl bg-yellow-500 hover:bg-opacity-100 text-center cursor-pointer w-full md:w-auto"
                 onClick={handleTraitConfirm}
               >
                 Continue
@@ -906,7 +906,7 @@ export default function Form() {
               <div className="text-xl md:text-2xl 2xl:text-3xl font-bold mb-10 text-center w-full md:w-3/4">
                 Do you prefer using any of the following?
               </div>
-              <div className="flex flex-wrap justify-center gap-2 md:gap-4 mb-10 w-full">
+              <div className="flex flex-wrap justify-center gap-2 md:gap-4 md:mb-10 w-full">
                 {['React', 'Angular', 'Vue.js', 'Node.js', 'Django', 'Flask', 'Spring Boot', 'Laravel', 'Express.js', 'MongoDB', 'PostgreSQL', 'Docker'].map(tech => (
                   <motion.button
                     key={tech}
@@ -946,7 +946,7 @@ export default function Form() {
                 exit: { opacity: 0, y: -5 }
               }}
               transition={{ duration: 0.5 }}
-              className="text-5xl md:text-6xl 2xl:text-8xl mt-28 md:mt-0 font-bold mb-20 md:mb-28 text-center"
+              className="text-5xl md:text-6xl 2xl:text-8xl mt-28 md:mt-0 font-bold mb-16 md:mb-28 text-center"
             >
               ABOUT YOUR PROJECT
             </motion.h2>
@@ -1002,7 +1002,7 @@ export default function Form() {
                 exit: { opacity: 0, y: 20 }
               }}
               transition={{ duration: 0.8 }}
-              className="text-5xl md:text-6xl 2xl:text-8xl mt-24 md:mt-0 font-bold mb-20 md:mb-28 text-center"
+              className="text-5xl md:text-6xl 2xl:text-8xl mt-24 md:mt-0 font-bold mb-16 md:mb-28 text-center"
             >
               ABOUT YOUR PROJECT
             </motion.h2>
@@ -1015,11 +1015,11 @@ export default function Form() {
               transition={{ duration: 0.8 }}
               className='flex flex-col justify-center items-center w-full'
             >
-              <div className="text-xl md:text-2xl 2xl:text-3xl font-bold mb-10 text-center w-full md:w-3/4">
+              <div className="text-xl md:text-2xl 2xl:text-3xl font-bold mb-5 md:mb-10 text-center w-full md:w-3/4">
                 Do any of these areas spark interest?
               </div>
               <div className="flex flex-wrap justify-center gap-2 md:gap-4 mb-10 w-full">
-                {['Web Development', 'Mobile Apps', 'AI/Machine Learning', 'Data Science', 'Cybersecurity', 'Cloud Computing', 'DevOps', 'AR/VR', 'Operating Systems', 'Robotics'].map(area => (
+                {['Web Development', 'Mobile Apps', 'AI/Machine Learning', 'Data Science', 'Cybersecurity', 'Cloud Computing', 'DevOps', 'AR/VR', 'Operating Systems'].map(area => (
                   <motion.button
                     key={area}
                     whileHover={{ scale: 1.05 }}
