@@ -33,25 +33,22 @@ function ProfilePage() {
       console.error('Error fetching user:', error);
       showSnackbar('Error fetching user data', 'error');
     } else if (user) {
+      console.log(user)
+
       // Fix name
       if (!user.user_metadata.full_name && user.user_metadata.first_name && user.user_metadata.last_name) {
         user.user_metadata.full_name = `${user.user_metadata.first_name} ${user.user_metadata.last_name}`;
 
-        // Update the user data in Supabase
         const { data, error } = await supabase.auth.updateUser({
           data: { full_name: user.user_metadata.full_name }
         });
 
         if (error) {
           console.error('Error updating full name:', error);
-          showSnackbar('Error updating full name', 'error');
-        } else {
-          console.log('Full name updated successfully');
         }
       }
 
       setUser(user);
-      console.log(user);
     }
 
     setLoading(false);
@@ -101,7 +98,7 @@ function ProfilePage() {
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mb: 4 }}>
           <Avatar
             sx={{ width: 100, height: 100, mb: 2 }}
-            src={user.user_metadata.avatar_url}
+            src={user.user_metadata.avatar_url || user.user_metadata.picture}
           />
           <Typography variant="body1" color="textSecondary">
             {user.email}
