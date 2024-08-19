@@ -13,6 +13,7 @@ import App from './App.jsx'
 import Form from './routes/Form.jsx'
 import Profile from './routes/Profile.jsx'
 import Projects from './routes/Projects.jsx'
+import NotFound from './routes/NotFound.jsx'
 
 
 const router = createBrowserRouter([
@@ -31,7 +32,11 @@ const router = createBrowserRouter([
   {
     path: "/projects",
     element: <Projects />
-  }
+  },
+  {
+    path: "*",
+    element: <NotFound />,
+  },
 
 ])
 
