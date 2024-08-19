@@ -8,6 +8,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
+import { Skeleton } from '@mui/material';
 
 const ProjectCard = ({ project, onExpand, onToggleSave, onDelete }) => {
   const [isDeleting, setIsDeleting] = useState(false);
@@ -67,6 +68,16 @@ const ProjectCard = ({ project, onExpand, onToggleSave, onDelete }) => {
     </div>
   );
 };
+
+const ProjectSkeleton = () => (
+  <div className="border p-4 rounded-lg relative">
+    <Skeleton variant="text" width="60%" height={32} />
+    <Skeleton variant="text" width="100%" height={20} />
+    <Skeleton variant="text" width="100%" height={20} />
+    <Skeleton variant="rectangular" width="40%" height={36} className="mt-4" />
+    <Skeleton variant="circular" width={24} height={24} className="absolute top-2 right-2" />
+  </div>
+);
 
 const Projects = () => {
   const [expandedProject, setExpandedProject] = useState(null);
@@ -155,7 +166,31 @@ const Projects = () => {
     setExpandedProject(null);
   };
 
-  if (loading) return <div className="text-white">Loading projects...</div>;
+  // Loading skeleton
+  if (loading) {
+    return (
+      <div className="mx-screen bg-gradient-to-br from-black via-gray-900 to-blue-500 min-h-screen overflow-y-auto">
+        <Navbar />
+        <section className="mb-8">
+          <h1 className="text-3xl font-bold mb-6 px-3 text-white">Saved Projects</h1>
+          <div className="grid grid-cols-1 md:grid-cols-2 px-3 lg:grid-cols-3 gap-4">
+            {[...Array(3)].map((_, index) => (
+              <ProjectSkeleton key={`saved-skeleton-${index}`} />
+            ))}
+          </div>
+        </section>
+        <section>
+          <h1 className="text-3xl font-bold mb-6 px-3 text-white">My Projects</h1>
+          <div className="grid grid-cols-1 md:grid-cols-2 px-3 mb-10 lg:grid-cols-3 gap-4">
+            {[...Array(3)].map((_, index) => (
+              <ProjectSkeleton key={`my-skeleton-${index}`} />
+            ))}
+          </div>
+        </section>
+      </div>
+    );
+  }
+
   if (error) return <div className="text-white">Error: {error}</div>;
 
   const savedProjects = projects.filter(project => project.saved);
