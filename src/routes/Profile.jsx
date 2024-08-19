@@ -33,9 +33,27 @@ function ProfilePage() {
       console.error('Error fetching user:', error);
       showSnackbar('Error fetching user data', 'error');
     } else if (user) {
+      // Fix name
+      if (!user.user_metadata.full_name && user.user_metadata.first_name && user.user_metadata.last_name) {
+        user.user_metadata.full_name = `${user.user_metadata.first_name} ${user.user_metadata.last_name}`;
+
+        // Update the user data in Supabase
+        const { data, error } = await supabase.auth.updateUser({
+          data: { full_name: user.user_metadata.full_name }
+        });
+
+        if (error) {
+          console.error('Error updating full name:', error);
+          showSnackbar('Error updating full name', 'error');
+        } else {
+          console.log('Full name updated successfully');
+        }
+      }
+
       setUser(user);
-      console.log(user)
+      console.log(user);
     }
+
     setLoading(false);
   }
 
@@ -96,7 +114,7 @@ function ProfilePage() {
               <TextField
                 fullWidth
                 label="Full Name"
-                value={user.user_metadata.first_name + user.user_metadata.last_name || user.user_metadata.full_name || ''}
+                value={user.user_metadata.full_name || ''}
                 onChange={(e) => setUser({
                   ...user,
                   user_metadata: { ...user.user_metadata, full_name: e.target.value }
