@@ -96,7 +96,7 @@ function ProfilePage() {
               <TextField
                 fullWidth
                 label="Full Name"
-                value={user.user_metadata.first_name + " " + user.user_metadata.last_name || user.user_metadata.full_name || ''}
+                value={user.user_metadata.first_name + user.user_metadata.last_name || user.user_metadata.full_name || ''}
                 onChange={(e) => setUser({
                   ...user,
                   user_metadata: { ...user.user_metadata, full_name: e.target.value }

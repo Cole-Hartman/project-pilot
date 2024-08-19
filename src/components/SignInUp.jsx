@@ -33,7 +33,7 @@ export default function SignInUp() {
         password,
         options: {
           data: {
-            first_name: firstName,
+            first_name: firstName + " ",
             last_name: lastName,
           }
         }
