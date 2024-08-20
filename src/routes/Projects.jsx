@@ -9,6 +9,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import { Skeleton } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+
 
 const ProjectCard = ({ project, onExpand, onToggleSave, onDelete }) => {
   const [isDeleting, setIsDeleting] = useState(false);
@@ -31,7 +33,7 @@ const ProjectCard = ({ project, onExpand, onToggleSave, onDelete }) => {
       <h3 className="text-xl font-bold">{project.title}</h3>
       <p className="mt-2">{project.short_description}</p>
       <button
-        className="mt-4 bg-blue-500 text-white px-4 py-2 rounded"
+        className="mt-4 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
         onClick={() => onExpand(project)}
       >
         Learn More
@@ -85,6 +87,9 @@ const Projects = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
+  const [isGenerateExpanded, setIsGenerateExpanded] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchProjects();
@@ -166,6 +171,14 @@ const Projects = () => {
     setExpandedProject(null);
   };
 
+  const handleGenerateNewClick = () => {
+    setIsGenerateExpanded(true);
+  };
+
+  const handleGenerateClose = () => {
+    setIsGenerateExpanded(false);
+  };
+
   // Loading skeleton
   if (loading) {
     return (
@@ -230,7 +243,10 @@ const Projects = () => {
 
       {/* My Projects Section */}
       <section>
-        <h1 className="text-3xl font-bold mb-6 px-3 text-white">My Projects</h1>
+        <div className="mb-6 flex items-center gap-5">
+          <h1 className="text-3xl font-bold pl-3 text-white">My Projects</h1>
+          <button className="text-lg border rounded-xl px-3 hover:border-blue-500 hover:text-blue-500" onClick={handleGenerateNewClick}>+ Generate New</button>
+        </div>
         {unsavedProjects.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 px-3 mb-10 lg:grid-cols-3 gap-4">
             {unsavedProjects.map((project) => (
@@ -250,13 +266,20 @@ const Projects = () => {
         )}
       </section>
 
-      <Expand isOpen={!!expandedProject} onClose={handleClose}>
+      <Expand isOpen={!!expandedProject} onClose={handleClose} title="Project Details">
         {expandedProject && (
           <>
             <h2 className="text-2xl font-bold mb-4">{expandedProject.title}</h2>
             <p className="mb-4">{expandedProject.long_description}</p>
           </>
         )}
+      </Expand>
+
+      <Expand isOpen={isGenerateExpanded} onClose={handleGenerateClose} title="Generate New Project">
+        <div className="text-center">
+          {/*<button className="mb-6 hover:bg-blue-600 border px-3 py-2 rounded-xl">Use Previous Preferences</button>*/}
+          <button className="mb-2 hover:bg-blue-600 md:mx-4 border px-3 py-2 rounded-xl" onClick={() => navigate('/form')} >Create New Preferences</button>
+        </div>
       </Expand>
     </div>
   );

@@ -304,8 +304,8 @@ export default function Form() {
         return (
           <motion.div key="step0" {...fadeTransition} className='flex flex-col justify-center items-center'>
             <div className='flex flex-col items-center md:flex-row md:gap-4 md:mb-5'>
-              <div className="text-6xl 2xl:text-8xl font-bold">GET</div>
-              <div className="text-6xl 2xl:text-8xl font-bold text-blue-500">STARTED</div>
+              <div className="text-6xl 2xl:text-8xl font-bold">FIND</div>
+              <div className="text-6xl 2xl:text-8xl font-bold text-blue-500">PROJECTS</div>
             </div>
             <div className='md:mb-1 text-center text-xl font-bold'>Let's learn a bit about you and your project's needs.</div>
             <motion.div

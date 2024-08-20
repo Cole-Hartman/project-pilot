@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const Expand = ({ isOpen, onClose, children }) => {
+const Expand = ({ isOpen, onClose, title, children }) => {
   const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) {
       onClose();
@@ -21,7 +21,6 @@ const Expand = ({ isOpen, onClose, children }) => {
             className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-40"
             onClick={handleBackdropClick}
           />
-
           {/* Centering Container */}
           <div
             className="fixed inset-0 flex items-center justify-center z-50 p-4"
@@ -38,7 +37,7 @@ const Expand = ({ isOpen, onClose, children }) => {
             >
               {/* Header with close button */}
               <div className="p-4 flex justify-between items-center border-b border-blue-700">
-                <h2 className="text-xl font-bold">Project Details</h2>
+                <h2 className="text-xl font-bold">{title}</h2>
                 <button
                   className="text-white hover:text-gray-300 text-xl"
                   onClick={onClose}
@@ -46,7 +45,6 @@ const Expand = ({ isOpen, onClose, children }) => {
                   ×
                 </button>
               </div>
-
               {/* Scrollable content */}
               <div className="p-6 overflow-y-auto">
                 {children}
