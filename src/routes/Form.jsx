@@ -6,7 +6,7 @@ import AuthWrapper from '../components/AuthWrapper.jsx'
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import OpenAI from "openai";
 import { supabase } from '../config/supabaseClient.js';
-import { CircularProgress, LinearProgress } from '@mui/material';
+import { CircularProgress } from '@mui/material';
 
 
 export default function Form() {
@@ -23,7 +23,6 @@ export default function Form() {
   const [isUploading, setIsUploading] = useState(false);
   const [completion, setCompletion] = useState(null);
 
-  const totalSteps = 14
 
   {/*Transition Presets*/ }
   const fadeTransition = {
@@ -152,7 +151,7 @@ export default function Form() {
   {/* On submit, prompt GPT */ }
   async function Completion(prompt) {
     try {
-      console.log("PROMPT REQUESTED", prompt);
+      //console.log("PROMPT REQUESTED", prompt);
       const openai = new OpenAI({ apiKey: import.meta.env.VITE_OPENAI_API_KEY, dangerouslyAllowBrowser: true });
       const result = await openai.chat.completions.create({
         messages: [{ role: "system", content: prompt }],
@@ -210,7 +209,7 @@ export default function Form() {
 
         const newPrompt = prompt + currProjects
 
-        const newPrompt2 = newPrompt + "INSTRUCTION: Please provide 10 project ideas in the following specific format: Title: [Project Title] Short Description: [A brief one-sentence description of the project] Long Description:[A more detailed 3-4 sentence description of the project, including its purpose, key features, and potential challenges] Title: [Project Title] Short Description: [A brief one-sentence description of the project] Long Description: [A more detailed 3-4 sentence description of the project, including its purpose, key features, and potential challenges] [Continue for all 10 projects] Please ensure that each project follows this exact format, with Title:, Short Description:, and Long Description: labels for each project. Do not include any additional text or formatting outside of this structure. Ensure each project idea aligns roughly with the specified interests, technologies, and preferences of the user. Avoid providing any additional details such as implementation steps or code snippets. Maintain a consistent format for each project idea. Do not use any markdown formatting. Return the projects only in the format specified.";
+        const newPrompt2 = newPrompt + "INSTRUCTION: Please provide 21 project ideas in the following specific format: Title: [Project Title] Short Description: [A brief one-sentence description of the project] Long Description:[A more detailed 3-4 sentence description of the project, including its purpose, key features, and potential challenges] Title: [Project Title] Short Description: [A brief one-sentence description of the project] Long Description: [A more detailed 3-4 sentence description of the project, including its purpose, key features, and potential challenges] [Continue for all 21 projects] Please ensure that each project follows this exact format, with Title:, Short Description:, and Long Description: labels for each project. Do not include any additional text or formatting outside of this structure. Ensure each project idea aligns roughly with the specified interests, technologies, and preferences of the user. Avoid providing any additional details such as implementation steps or code snippets. Maintain a consistent format for each project idea. Do not use any markdown formatting. Return the projects only in the format specified.";
         const completionResult = await Completion(newPrompt2);
         if (completionResult) {
           //console.log("COMPLETION RESULT:", completionResult);
@@ -250,7 +249,7 @@ export default function Form() {
       if (completion) {
         //console.log("Raw completion text:", completion);
         const parsedProjects = parseCompletion(completion);
-        console.log(`Parsed ${parsedProjects.length} projects:`, parsedProjects);
+        //console.log(`Parsed ${parsedProjects.length} projects:`, parsedProjects);
 
         if (parsedProjects.length === 0) {
           console.error("No projects were parsed. Check the completion format.");
@@ -269,7 +268,7 @@ export default function Form() {
         }
 
         for (const project of parsedProjects) {
-          console.log(`Inserting project:`, project);
+          //console.log(`Inserting project:`, project);
           try {
             const { data, error } = await supabase
               .from('projects')
@@ -284,12 +283,12 @@ export default function Form() {
               ]);
 
             if (error) throw error;
-            console.log('Project inserted successfully:', data);
+            //console.log('Project inserted successfully:', data);
           } catch (error) {
             console.error('Error inserting project:', error);
           }
         }
-        console.log('Insertion Complete');
+        //console.log('Insertion Complete');
         navigate('/projects');
         setIsUploading(false)
       } else {

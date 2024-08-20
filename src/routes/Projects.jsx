@@ -311,10 +311,10 @@ const Projects = () => {
         )}
       </Expand>
 
-      <Expand isOpen={isGenerateExpanded} onClose={handleGenerateClose} title="Generate New Project">
+      <Expand isOpen={isGenerateExpanded} onClose={handleGenerateClose} title="Generate New Projects?">
         <div className="text-center">
           {/*<button className="mb-6 hover:bg-blue-600 border px-3 py-2 rounded-xl">Use Previous Preferences</button>*/}
-          <button className="mb-2 hover:bg-blue-600 md:mx-4 border px-3 py-2 rounded-xl" onClick={() => navigate('/form')} >Create New Preferences</button>
+          <button className="mb-2 hover:bg-blue-600 md:mx-4 border px-3 py-2 rounded-xl" onClick={() => navigate('/form')} >Get Started</button>
         </div>
       </Expand>
 
