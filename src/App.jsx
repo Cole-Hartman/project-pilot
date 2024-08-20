@@ -54,7 +54,7 @@ function App() {
             }}>
             <div className="text-lg px-2 mt-3 2xl:mb-9 flex flex-col justify-center items-center">
               <div className="md:w-2/3">
-                <div className="mb-2 inline 2xl:text-xl">Find Personalized CS project Ideas tailored against your current </div>
+                <div className="mb-2 inline 2xl:text-xl">Find personalized CS project Ideas tailored against your current </div>
                 <div className="text-blue-500 inline 2xl:text-xl">skill level, </div>
                 <div className="inline 2xl:text-xl">and</div>
                 <div className="text-blue-500 inline 2xl:text-xl"> ambition.</div>
@@ -63,6 +63,8 @@ function App() {
               <div className="pt-3 md:w-3/4 2xl:text-xl">
                 <div className="inline">Build around structured prompt engineering designed for </div>
                 <div className="inline text-blue-500">optimal AI comprehension</div>
+                <div className="inline"> and </div>
+                <div className="inline text-blue-500">return.</div>
               </div>
             </div>
           </motion.div>
@@ -73,7 +75,7 @@ function App() {
             >
               <button
                 onClick={() => navigate('/form')}
-                className="w-26 h-10 text-sm xl:text-md 2xl:w-40 2xl:h-12 shadow-lg hover:shadow-xl px-2 2xl:px-4 2xl:py-2 bg-blue-600 bg-opacity-90 text-white font-semibold 2xl:text-lg rounded-md text-opacity-90 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300 mb-16 lg:mb-0"
+                className="w-26 h-10 text-sm xl:text-md 2xl:w-40 2xl:h-12 shadow-lg hover:shadow-xl px-2 2xl:px-4 2xl:py-2 bg-blue-600 bg-opacity-90 text-white font-semibold 2xl:text-md rounded-md text-opacity-90 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300 mb-16 lg:mb-0"
               >
                 FIND PROJECTS
               </button>
@@ -83,7 +85,7 @@ function App() {
               whileHover={{ scale: 1.1 }}
             >
               <button
-                className="h-10 2xl:w-36 2xl:h-12 shadow-lg hover:shadow-xl px-4 py-2 bg-opacity-0 border border-blue-300 text-blue-300 text-opacity-90 font-semibold text-sm xl:text-md 2xl:text-lg rounded-md hover:border-blue-400 hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-300"
+                className="h-10 2xl:w-36 2xl:h-12 shadow-lg hover:shadow-xl px-4 py-2 bg-opacity-0 border border-blue-300 text-blue-300 text-opacity-90 font-semibold text-sm xl:text-md 2xl:text-md rounded-md hover:border-blue-400 hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-300"
                 onClick={() => {
                   aboutRef.current?.scrollIntoView({ behavior: 'smooth' })
                 }}
@@ -114,7 +116,7 @@ function App() {
             <div className="inline 2xl:block text-5xl 2xl:text-6xl font-bold text-blue-500">YOU</div>
           </div>
 
-          <div className="mt-2 mx-2 text-center 2xl:text-xl md:w-3/4">Project Pilot is a tool build around refined and structured prompt engineering that allows you to easily communicate your ideas and needs for optimal AI comprehension to only generate tailored and industry standard computer science project ideas for you.</div>
+          <div className="mt-2 mx-2 text-center 2xl:text-xl md:w-3/4">Project Pilot is a tool built around refined and structured prompt engineering that allows you to easily communicate your ideas and needs to generate tailored and industry standard computer science project ideas.</div>
           <div className="mt-2 mx-2 text-center 2xl:text-xl mb-5 md:w-1/2">Designed for students, hobbyists, and professionals alike, our app transforms the way you brainstorm and plan your next big project.</div>
 
           <div className="flex flex-col justify-center items-center mt-10 text-center xl:flex-row xl:mx-10">
@@ -138,8 +140,8 @@ function App() {
               >
                 <Paper className="mx-3 px-3 py-2 pb-5 xl:my-5 2xl:text-lg 2xl:w-3/4">
                   <ul className="text-left mt-2">
-                    <li className="font-bold">Effortless Idea Generation:</li>
-                    <li className="pl-3">Skip the hassle of sluggishly prompting AI to generate a project for you while typing out every detail about your skill level and your project needs. With just a few clicks, you can generate highly specific and relevant project ideas with maximum efficiency and accuracy.</li>
+                    <li className="font-bold">Faster, Better, Stronger:</li>
+                    <li className="pl-3">Sluggishly prompting AI to understand who you are and what you need is redundant and time consuming. With just a few clicks, you can generate highly specific and relevant project ideas with maximum efficiency and accuracy.</li>
                   </ul>
                 </Paper>
               </motion.div>
@@ -211,7 +213,7 @@ function App() {
             </motion.div>
           </div>
 
-          <div className="mx-3 mb-5 md:w-4/5 2xl:text-xl 2xl:w-3/5">According to Code.org, students who work on personal coding projects or internships are 50% more likely to land a job in the tech industry shortly after graduation compared to those who only complete their formal coursework.</div>
+          <div className="mx-3 mb-5 md:w-4/5 2xl:text-xl 2xl:w-3/5">According to Code.org, students who work on personal coding projects are 50% more likely to land a job in the tech industry shortly after graduation compared to those who only complete their formal coursework.</div>
 
           <motion.div
             className="2xl:mt-7"
@@ -240,7 +242,7 @@ function App() {
                 What makes Project Pilot different from other idea generators?
               </AccordionSummary>
               <AccordionDetails>
-                Project Pilot uses a sophisticated AI-driven system to craft tailored project ideas based on your input. By selecting from a range of options related to your experience level, interests, and goals, you provide the necessary context. Our AI then processes this information and generates highly specific and relevant project ideas that align with current tech industry trends and standards.
+                Project Pilot is designed to gather as much information about you and your needs with as little input as possible using a sophisticated AI-driven system. By selecting from a range of options related to your experience level, interests, and goals, you provide the necessary context. Our AI then processes this information and generates highly specific and relevant project ideas that align with current tech industry trends and standards.
               </AccordionDetails>
             </Accordion>
             <Accordion>
@@ -264,7 +266,7 @@ function App() {
                 How secure is my data with Project Pilot?
               </AccordionSummary>
               <AccordionDetails>
-                Your privacy and data security are top priorities for us. Project Pilot employs industry-standard security measures to protect your information. We use encryption for data transmission and storage, and our systems are regularly monitored for vulnerabilities. Additionally, we adhere to strict privacy policies to ensure that your data is used only for generating project ideas and is never shared with unauthorized third parties.
+                Your privacy and data security are very important. Project Pilot employs industry-standard security measures to protect your information. Our databases are encrypted for data transmission and storage, and our systems are regularly monitored for vulnerabilities. Additionally, we adhere to strict privacy policies to ensure that your data is used only for generating project ideas and is never shared with unauthorized third parties.
               </AccordionDetails>
             </Accordion>
           </div>
@@ -274,6 +276,7 @@ function App() {
           </div>
 
           {/*Quotes Section*/}
+          {/*
           <div className="mt-18 mt-16 mb-10 grid grid-cols-1 w-4/5 md:grid md:grid-cols-3 2xl:text-xl">
             <motion.div
               initial={{ opacity: 0 }}
@@ -308,6 +311,7 @@ function App() {
               </Paper>
             </motion.div>
           </div>
+        */}
 
           {/*Footer Section*/}
           <div className="h-32 md:h-28 w-full mt-10 grid grid-cols-3 md:grid-cols-4 2xl:text-lg md:mb-10 lg:mb-0 xl:mt-32">
