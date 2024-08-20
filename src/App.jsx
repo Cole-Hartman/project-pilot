@@ -1,7 +1,5 @@
-//import { useState } from "react";
 import { motion } from "framer-motion";
 import Paper from '@mui/material/Paper';
-import { Link } from "react-router-dom";
 import Navbar from "./components/navbar.jsx"
 import MobileTree from './assets/mobile-tree.png'
 import Accordion from '@mui/material/Accordion';
@@ -12,6 +10,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { BarChart } from '@mui/x-charts/BarChart';
 import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import demoVid from '../public/demovid.mp4'
 
 
 function App() {
@@ -97,12 +96,12 @@ function App() {
 
           <div className="mx-5 mt-3 md:w-2/3 2xl:w-1/2">
             <video
-              src="https://framerusercontent.com/assets/Og1qbbFDYhzyJkDS765JkhHMgeQ.mp4"
+              src={demoVid}
               loop
               playsInline
               autoPlay
               muted
-              style={{ cursor: 'auto', width: '100%', height: '100%', borderRadius: '20px', display: 'block', objectFit: 'cover', backgroundColor: 'rgba(0, 0, 0, 0)', objectPosition: '50% 50%' }}
+              style={{ cursor: 'auto', width: '100%', borderRadius: '20px', display: 'block', objectFit: 'cover', backgroundColor: 'rgba(0, 0, 0, 0)', objectPosition: '50% 50%' }}
             ></video>
           </div>
 
