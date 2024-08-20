@@ -10,7 +10,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { BarChart } from '@mui/x-charts/BarChart';
 import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import demoVid from '../public/demovid.mp4'
+import demoVid from '/demovid.mp4'
 
 
 function App() {
@@ -28,7 +28,7 @@ function App() {
           <Navbar />
         </motion.div>
 
-        <div className="flex flex-col justify-center items-center mt-10 text-center">
+        <div className="flex flex-col justify-center items-center mt-10 2xl:mt-20 text-center">
           <motion.div
             className="mx-3 mt-5 2xl:mb-6"
             initial={{ opacity: 0, y: [-50] }}
@@ -39,8 +39,8 @@ function App() {
               bounce: 0.3
             }}
           >
-            <div className="text-5xl 2xl:text-6xl font-bold mb-4">YOUR DREAM PROJECT</div>
-            <div className="text-5xl 2xl:text-6xl font-bold text-blue-500">STARTS HERE</div>
+            <div className="text-5xl 2xl:text-7xl font-bold mb-4">YOUR DREAM PROJECT</div>
+            <div className="text-5xl 2xl:text-7xl font-bold text-blue-500">STARTS HERE</div>
           </motion.div>
           <motion.div
             className="mx-3 my-2"
@@ -51,7 +51,7 @@ function App() {
               duration: 1.7,
               bounce: 0.3
             }}>
-            <div className="text-lg px-2 mt-3 2xl:mb-9 flex flex-col justify-center items-center">
+            <div className="text-lg px-2 mt-3 2xl:mt-5 2xl:mb-16 flex flex-col justify-center items-center">
               <div className="md:w-2/3">
                 <div className="mb-2 inline 2xl:text-xl">Find personalized CS project Ideas tailored against your current </div>
                 <div className="text-blue-500 inline 2xl:text-xl">skill level, </div>
@@ -60,7 +60,7 @@ function App() {
               </div>
 
               <div className="pt-3 md:w-3/4 2xl:text-xl">
-                <div className="inline">Build around structured prompt engineering designed for </div>
+                <div className="inline">Built around structured prompt engineering designed for </div>
                 <div className="inline text-blue-500">optimal AI comprehension</div>
                 <div className="inline"> and </div>
                 <div className="inline text-blue-500">return.</div>
@@ -68,13 +68,13 @@ function App() {
             </div>
           </motion.div>
 
-          <div className="mx-2 my-5 flex gap-5">
+          <div className="mx-2 mt-5 md:mt-0 md:my-5 flex gap-5">
             <motion.div
               whileHover={{ scale: 1.1 }}
             >
               <button
                 onClick={() => navigate('/form')}
-                className="w-26 h-10 text-sm xl:text-md 2xl:w-40 2xl:h-12 shadow-lg hover:shadow-xl px-2 2xl:px-4 2xl:py-2 bg-blue-600 bg-opacity-90 text-white font-semibold 2xl:text-md rounded-md text-opacity-90 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300 mb-16 lg:mb-0"
+                className="w-26 h-10 text-sm xl:text-md 2xl:w-44 2xl:h-14 shadow-lg hover:shadow-xl px-2 2xl:px-4 2xl:py-2 bg-blue-600 bg-opacity-90 text-white font-semibold 2xl:text-md rounded-md text-opacity-90 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300 mb-16 lg:mb-0"
               >
                 FIND PROJECTS
               </button>
@@ -84,7 +84,7 @@ function App() {
               whileHover={{ scale: 1.1 }}
             >
               <button
-                className="h-10 2xl:w-36 2xl:h-12 shadow-lg hover:shadow-xl px-4 py-2 bg-opacity-0 border border-blue-300 text-blue-300 text-opacity-90 font-semibold text-sm xl:text-md 2xl:text-md rounded-md hover:border-blue-400 hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-300"
+                className="h-10 2xl:w-40 2xl:h-14 shadow-lg hover:shadow-xl px-4 py-2 bg-opacity-0 border border-blue-300 text-blue-300 text-opacity-90 font-semibold text-sm xl:text-md 2xl:text-md rounded-md hover:border-blue-400 hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-300"
                 onClick={() => {
                   aboutRef.current?.scrollIntoView({ behavior: 'smooth' })
                 }}
@@ -94,14 +94,26 @@ function App() {
             </motion.div>
           </div>
 
-          <div className="mx-5 mt-3 md:w-2/3 2xl:w-1/2">
+          {/* Demo video */}
+          <div className="mx-5 md:mt-3 xl:mt-10 md:w-2/3 2xl:w-1/2 relative">
+            <div
+              className="absolute inset-0 bg-blue-500 opacity-75 blur-3xl -z-10 scale-110"
+              style={{
+                boxShadow: '0 0 40px 20px rgba(59, 130, 246, 0.5), 0 0 100px 60px rgba(59, 130, 246, 0.4)',
+              }}
+            ></div>
             <video
               src={demoVid}
               loop
               playsInline
               autoPlay
               muted
-              style={{ cursor: 'auto', width: '100%', borderRadius: '20px', display: 'block', objectFit: 'cover', backgroundColor: 'rgba(0, 0, 0, 0)', objectPosition: '50% 50%' }}
+              className="relative z-10 w-full rounded-[20px] block object-cover bg-transparent"
+              style={{
+                cursor: 'auto',
+                objectPosition: '50% 50%',
+                boxShadow: '0 0 20px 10px rgba(59, 130, 246, 0.3)',
+              }}
             ></video>
           </div>
 
