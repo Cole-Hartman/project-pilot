@@ -1094,23 +1094,8 @@ export default function Form() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ amount: "all" }}
-          className='border'
         >
           <Navbar />
-          <div className='w-full'>
-            <LinearProgress
-              className='mb-4'
-              variant="determinate"
-              value={(step / totalSteps) * 100}
-              sx={{
-                height: 3,
-                backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                '& .MuiLinearProgress-bar': {
-                  backgroundColor: '#3B82F6' // This is the Tailwind blue-500 color
-                }
-              }}
-            />
-          </div>
         </motion.div>
         <div className='h-full flex items-center justify-center pb-52 mt-5'>
           <div className="mx-3 my-2 flex flex-col justify-center items-center">
