@@ -3,10 +3,12 @@ import TerminalIcon from '@mui/icons-material/Terminal';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../config/supabaseClient.js';
+import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Button } from '@mui/material';
 
 export default function NavbarButtons() {
   const [session, setSession] = useState(null);
   const [profilePicUrl, setProfilePicUrl] = useState(null);
+  const [openConfirmDialog, setOpenConfirmDialog] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -31,10 +33,19 @@ export default function NavbarButtons() {
     return () => subscription.unsubscribe();
   }, []);
 
-  const handleSignOut = async () => {
+  const handleSignOutClick = () => {
+    setOpenConfirmDialog(true);
+  };
+
+  const handleConfirmSignOut = async () => {
+    setOpenConfirmDialog(false);
     const { error } = await supabase.auth.signOut();
     if (error) console.log('Error signing out:', error.message);
     else navigate('/'); // Redirect to home page after sign out
+  };
+
+  const handleCancelSignOut = () => {
+    setOpenConfirmDialog(false);
   };
 
   if (!session) {
@@ -55,7 +66,7 @@ export default function NavbarButtons() {
       <button onClick={() => navigate('/projects')} className="pr-2">
         Projects
       </button>
-      <button onClick={handleSignOut} className="pr-1">Sign Out</button>
+      <button onClick={handleSignOutClick} className="pr-1">Sign Out</button>
       <button onClick={() => navigate('/profile')}>
         {profilePicUrl ? (
           <img
@@ -73,6 +84,26 @@ export default function NavbarButtons() {
           />
         )}
       </button>
+
+      <Dialog
+        open={openConfirmDialog}
+        onClose={handleCancelSignOut}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Confirm Sign Out"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Are you sure you want to sign out?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCancelSignOut}>Cancel</Button>
+          <Button onClick={handleConfirmSignOut} autoFocus>
+            Sign Out
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }
