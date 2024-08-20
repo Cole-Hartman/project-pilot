@@ -8,9 +8,8 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
-import { Skeleton } from '@mui/material';
+import { Skeleton, CircularProgress } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-
 
 const ProjectCard = ({ project, onExpand, onToggleSave, onDelete }) => {
   const [isDeleting, setIsDeleting] = useState(false);
@@ -88,6 +87,8 @@ const Projects = () => {
   const [error, setError] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
   const [isGenerateExpanded, setIsGenerateExpanded] = useState(false);
+  const [isDeleteAllExpanded, setIsDeleteAllExpanded] = useState(false);
+  const [isDeletingAll, setIsDeletingAll] = useState(false);
 
   const navigate = useNavigate();
 
@@ -160,6 +161,31 @@ const Projects = () => {
     } catch (err) {
       console.error('Error deleting project:', err);
       setError(err.message);
+    }
+  };
+
+  const handleDeleteAllUnsaved = async () => {
+    setIsDeletingAll(true);
+    try {
+      const unsavedProjects = projects.filter(project => !project.saved);
+
+      for (const project of unsavedProjects) {
+        const { error } = await supabase
+          .from('projects')
+          .delete()
+          .eq('user_id', currentUser.id)
+          .eq('title', project.title);
+
+        if (error) throw error;
+      }
+
+      setProjects(projects.filter(project => project.saved));
+      setIsDeleteAllExpanded(false);
+    } catch (err) {
+      console.error('Error deleting unsaved projects:', err);
+      setError(err.message);
+    } finally {
+      setIsDeletingAll(false);
     }
   };
 
@@ -248,17 +274,27 @@ const Projects = () => {
           <button className="text-lg border rounded-xl px-3 hover:border-blue-500 hover:text-blue-500" onClick={handleGenerateNewClick}>+ Generate New</button>
         </div>
         {unsavedProjects.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 px-3 mb-10 lg:grid-cols-3 gap-4">
-            {unsavedProjects.map((project) => (
-              <ProjectCard
-                key={`${project.user_id}-${project.title}`}
-                project={project}
-                onExpand={handleExpand}
-                onToggleSave={handleToggleSave}
-                onDelete={handleDelete}
-              />
-            ))}
-          </div>
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-2 px-3 mb-10 lg:grid-cols-3 gap-4">
+              {unsavedProjects.map((project) => (
+                <ProjectCard
+                  key={`${project.user_id}-${project.title}`}
+                  project={project}
+                  onExpand={handleExpand}
+                  onToggleSave={handleToggleSave}
+                  onDelete={handleDelete}
+                />
+              ))}
+            </div>
+            <div className="flex justify-center mt-8 mb-12">
+              <button
+                className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
+                onClick={() => setIsDeleteAllExpanded(true)}
+              >
+                Delete All Unsaved Projects
+              </button>
+            </div>
+          </>
         ) : (
           <div className="text-center text-white text-xl">
             You don't have any unsaved projects yet, Get Started to find some!
@@ -279,6 +315,35 @@ const Projects = () => {
         <div className="text-center">
           {/*<button className="mb-6 hover:bg-blue-600 border px-3 py-2 rounded-xl">Use Previous Preferences</button>*/}
           <button className="mb-2 hover:bg-blue-600 md:mx-4 border px-3 py-2 rounded-xl" onClick={() => navigate('/form')} >Create New Preferences</button>
+        </div>
+      </Expand>
+
+      <Expand isOpen={isDeleteAllExpanded} onClose={() => setIsDeleteAllExpanded(false)} title="Confirm Deletion">
+        <div className="text-center">
+          <p className="mb-4">Are you sure you want to delete all unsaved projects? This action cannot be undone.</p>
+          <div className="flex justify-center space-x-4">
+            <button
+              className="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded"
+              onClick={() => setIsDeleteAllExpanded(false)}
+              disabled={isDeletingAll}
+            >
+              Cancel
+            </button>
+            <button
+              className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded flex items-center justify-center"
+              onClick={handleDeleteAllUnsaved}
+              disabled={isDeletingAll}
+            >
+              {isDeletingAll ? (
+                <>
+                  <CircularProgress size={24} color="inherit" className="mr-2" />
+                  Deleting...
+                </>
+              ) : (
+                'Confirm Delete'
+              )}
+            </button>
+          </div>
         </div>
       </Expand>
     </div>
