@@ -297,7 +297,7 @@ const Projects = () => {
           </>
         ) : (
           <div className="text-center text-white text-xl">
-            You don't have any unsaved projects yet, Get Started to find some!
+            You don't have any unsaved projects yet, get Started to find some!
           </div>
         )}
       </section>
