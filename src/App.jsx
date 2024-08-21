@@ -287,7 +287,7 @@ function App() {
           </div>
 
           {/*Quotes Section*/}
-          {/*
+
           <div className="mt-18 mt-16 mb-10 grid grid-cols-1 w-4/5 md:grid md:grid-cols-3 2xl:text-xl">
             <motion.div
               initial={{ opacity: 0 }}
@@ -295,8 +295,8 @@ function App() {
               viewport={{ amount: "all" }}
             >
               <Paper elevation={3} className="my-2 mx-2 w-auto px-2 py-1 text-left">
-                I was able to find a project that was within my skill level but also pushed my boundaries.
-                <div className="mt-2 text-blue-500 text-opacity-90 text-sm 2xl:text-md">Cole Hartman <br /> Student, CSULB</div>
+                Helps you get past brainstorming and get started building.
+                <div className="mt-2 text-blue-500 text-opacity-90 text-sm 2xl:text-md">Noah Kim<br /> Student, CSULB</div>
               </Paper>
             </motion.div>
 
@@ -306,8 +306,8 @@ function App() {
               viewport={{ amount: "all" }}
             >
               <Paper elevation={3} className="my-2 mx-2 w-auto px-2 py-1 text-left">
-                Easy to use
-                <div className="mt-2 text-blue-500 text-opacity-90 text-sm 2xl:text-md">Cole Hartman <br /> Student, CSULB</div>
+                I'm starting an open source study space finder for students!
+                <div className="mt-2 text-blue-500 text-opacity-90 text-sm 2xl:text-md">Angelo Sosa<br /> Student, SLU</div>
               </Paper>
             </motion.div>
 
@@ -317,12 +317,11 @@ function App() {
               viewport={{ amount: "all" }}
             >
               <Paper elevation={3} className="my-2 mx-2 w-auto px-2 py-1 text-left">
-                I got the idea for my first web scraping project here!
-                <div className="mt-2 text-blue-500 text-opacity-90 text-sm 2xl:text-md">Cole Hartman <br /> Student, CSULB</div>
+                Very intuitive to use.
+                <div className="mt-2 text-blue-500 text-opacity-90 text-sm 2xl:text-md">Jason Chen <br /> Developer, Coda</div>
               </Paper>
             </motion.div>
           </div>
-        */}
 
           {/*Footer Section*/}
           <div className="h-32 md:h-28 w-full mt-10 grid grid-cols-3 md:grid-cols-4 2xl:text-lg mb-5 md:mb-10 lg:mb-0 xl:mt-32">
