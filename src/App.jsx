@@ -332,7 +332,7 @@ function App() {
                 Project Pilot
               </div>
               <div className="text-sm sm:text-md xl:text-md 2xl:w-3/4">
-                Our mission is to give future tech leaders direction, standardization, consistency and transparency.
+                Start your project today and let us take care of the ideation process so you can spend more time on what matters most—building and creating.
               </div>
             </div>
             <div className="hidden md:block"></div>
