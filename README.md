@@ -1,26 +1,14 @@
-# Project Pilot
+# [Project Pilot](https://projpilot.com/)
 
-Your CS project starts here
-- Resume looking empty? Stuck in a project drought? Find your dream project here.  
-- Project Pilot will tailor it's recommendations against your current skill level, goals, and ambition. 
-- Students who build projects are **% more likely to get an internship.  
-
-Students often finding themselves stuck after biting off more then they could chew on their "dream project".   
-Project Pilot will find the perfect project for your interests and skill. If you want to pursue a new tech stack for this project, Project Pilot will take that into consideration.
-
-
-
-## Getting Started
-
-Visit the deployed version here: 
+Your CS project starts here.
 
 ## Built With
 
 * Vite, React
 * Supabase
+* TailwindCSS
 * Material UI
 * Framer Motion
-* TailwindCSS
 
 ## Authors
 
@@ -28,10 +16,9 @@ Visit the deployed version here:
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License
 
 ## Acknowledgments
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+* Appreciation - Everyone who tried out my website <3
+* Inspiration - How bad ChatGPT is at remembering who you are
