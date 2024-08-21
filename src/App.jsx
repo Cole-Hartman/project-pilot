@@ -325,7 +325,7 @@ function App() {
         */}
 
           {/*Footer Section*/}
-          <div className="h-32 md:h-28 w-full mt-10 grid grid-cols-3 md:grid-cols-4 2xl:text-lg md:mb-10 lg:mb-0 xl:mt-32">
+          <div className="h-32 md:h-28 w-full mt-10 grid grid-cols-3 md:grid-cols-4 2xl:text-lg mb-5 md:mb-10 lg:mb-0 xl:mt-32">
             <div className="col-span-2 flex flex-col items-left text-left pl-5 sm:pl-14 lg:pl-28 xl:pl-44 lg:w-3/4 2xl:w-full">
               <div className="font-bold flex gap-3 pb-1">
                 <TerminalIcon style={{ color: '#3B82F6' }} />
