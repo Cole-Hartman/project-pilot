@@ -1,4 +1,4 @@
-# [Project Pilot](https://projpilot.com/)
+# [Project Pilot ✈️](https://projpilot.com/)
 
 Your CS project starts here.
 
